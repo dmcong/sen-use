@@ -12,21 +12,21 @@ jobs:
       - name: Welcome
         run: echo Start deploying Sen Core
       - name: Authenticate with Registry
-        run: |
-          yarn logout
-          echo "@apollo-elements:registry=http://registry.npmjs.org/" > .npmrc
-          echo "registry=http://registry.npmjs.org/" >> .npmrc
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-          npm whoami
-      env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish npm package
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn install && yarn build
+      - name: Authenticate with Registry
+        run: |
+          yarn logout
+          echo "@apollo-elements:registry=http://registry.npmjs.org/" > .npmrc
+          echo "registry=http://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: yarn deploy
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
