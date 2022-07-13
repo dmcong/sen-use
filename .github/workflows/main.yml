@@ -11,6 +11,16 @@ jobs:
       - uses: actions/checkout@v2
       - name: Welcome
         run: echo Start deploying Sen Core
+      - name: Authenticate with Registry
+        run: |
+          yarn logout
+          echo "@apollo-elements:registry=http://registry.npmjs.org/" > .npmrc
+          echo "registry=http://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+      env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Publish npm package
         uses: actions/setup-node@v2
         with:
