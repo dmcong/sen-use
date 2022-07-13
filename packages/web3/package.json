@@ -1,6 +1,6 @@
 {
   "name": "@sen-use/web3",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The library for Sentre",
   "main": "dist/index.js",
   "publishConfig": {
