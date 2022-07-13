@@ -3,7 +3,7 @@
   "version": "1.0.6",
   "author": "Michael",
   "repository": "git+https://github.com/dmcong/sen-use.git",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "type": "module",
   "sideEffects": false,
   "main": "dist/index.js",
@@ -37,20 +37,15 @@
     "@types/react-dom": "17.0.11"
   },
   "peerDependencies": {
-    "@solana/web3.js": "^1.44.3",
     "react": "^17.0.39",
     "react-dom": "^17.0.11"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.0.0",
-    "@solana/wallet-adapter-base": "^0.9.9",
-    "@solana/wallet-adapter-react": "^0.15.8",
-    "antd": "^4.19.1"
+    "@sentre/senhub": "^3.0.44"
   },
   "devDependencies": {
-    "@solana/web3.js": "^1.44.3",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
     "copyfiles": "^2.4.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
