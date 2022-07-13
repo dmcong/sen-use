@@ -1,25 +1,34 @@
 {
   "name": "@sen-use/web3",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The library for Sentre",
   "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
-    "build": "npm run clean && tsc",
+    "prebuild": "yarn clean",
+    "build": "tsc",
     "clean": "rm -rf ./dist",
-    "predeploy": "typedoc --excludePrivate --excludeProtected ./src/index.ts",
-    "deploy": "gh-pages -d docs",
     "test": "npm run build && mocha --require ts-node/register -t 120000 tests/*.test.ts"
   },
+  "keywords": [
+    "web3",
+    "solana",
+    "sentre",
+    "senhub"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmcong/sentre-web3.git"
+    "url": "git+https://github.com/dmcong/sen-use.git"
   },
   "author": "CongDM",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dmcong/sentre-web3/issues"
+    "url": "https://github.com/dmcong/sen-use/issues"
   },
-  "homepage": "https://github.com/dmcong/sentre-web3/#readme",
+  "homepage": "https://github.com/dmcong/sen-use/#readme",
   "devDependencies": {
     "@types/bn.js": "^5.1.0",
     "@types/chai": "^4.3.0",
