@@ -132,7 +132,7 @@ export type BalancerAmm = {
           isSigner: false
         },
         {
-          name: 'mint'
+          name: '../index'
           isMut: false
           isSigner: false
         },
@@ -378,7 +378,7 @@ export type BalancerAmm = {
           isSigner: false
         },
         {
-          name: 'mint'
+          name: '../index'
           isMut: false
           isSigner: false
         },
@@ -691,7 +691,7 @@ export type BalancerAmm = {
           isSigner: false
         },
         {
-          name: 'mint'
+          name: '../index'
           isMut: false
           isSigner: false
         },
@@ -1107,7 +1107,7 @@ export const IDL: BalancerAmm = {
           isSigner: false,
         },
         {
-          name: 'mint',
+          name: '../index',
           isMut: false,
           isSigner: false,
         },
@@ -1353,7 +1353,7 @@ export const IDL: BalancerAmm = {
           isSigner: false,
         },
         {
-          name: 'mint',
+          name: '../index',
           isMut: false,
           isSigner: false,
         },
@@ -1666,7 +1666,7 @@ export const IDL: BalancerAmm = {
           isSigner: false,
         },
         {
-          name: 'mint',
+          name: '../index',
           isMut: false,
           isSigner: false,
         },

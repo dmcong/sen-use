@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useWallet, createPDB } from '@sentre/senhub'
-import { WalletConnectButton } from '@sen-use/components'
+import { MintSelection } from '@sen-use/components'
 
 import { Row, Col, Typography, Button, Space } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
@@ -44,7 +44,7 @@ const View = () => {
       <Col>
         <Button onClick={increase}>Increase</Button>
       </Col>
-      <WalletConnectButton />
+      <MintSelection />
     </Row>
   )
 }

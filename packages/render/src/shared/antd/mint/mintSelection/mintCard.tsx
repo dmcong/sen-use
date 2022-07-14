@@ -1,6 +1,6 @@
 import IonIcon from '@sentre/antd-ionicon'
 import { Card, Col, Row, Space, Tooltip, Typography } from 'antd'
-import { MintAvatar, MintName, MintSymbol } from 'shared/antd/mint'
+import { MintAvatar, MintName, MintSymbol } from '../index'
 import { useJupiterTokens } from './hooks/useJupiterTokens'
 
 export type MintSelectionProps = {
