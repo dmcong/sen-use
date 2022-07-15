@@ -34,10 +34,7 @@ const MintTag = ({
     >
       <Space size={8} style={{ width: '100%', justifyContent: 'center' }}>
         <MintAvatar mintAddress={mintAddress} />
-        <Typography.Text
-          ellipsis={true}
-          style={{ color: util.randomColor(mintAddress) }}
-        >
+        <Typography.Text style={{ color: util.randomColor(mintAddress) }}>
           <MintSymbol mintAddress={mintAddress} />
         </Typography.Text>
         {active && <IonIcon name="checkmark-outline" />}

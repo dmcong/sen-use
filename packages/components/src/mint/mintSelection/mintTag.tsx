@@ -35,8 +35,7 @@ const MintTag = ({
       <Space size={8} style={{ width: '100%', justifyContent: 'center' }}>
         <MintAvatar mintAddress={mintAddress} />
         <Typography.Text
-          ellipsis={true}
-          style={{ color: util.randomColor(mintAddress) }}
+          style={{ color: util.randomColor(mintAddress), whiteSpace: 'nowrap' }}
         >
           <MintSymbol mintAddress={mintAddress} />
         </Typography.Text>
