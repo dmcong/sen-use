@@ -74,12 +74,12 @@ export default class RawWallet {
   constructor(readonly publicKey: web3.PublicKey) {}
 
   async signTransaction(tx: web3.Transaction): Promise<web3.Transaction> {
-    throw new Error('')
+    throw new Error('Raw Wallet can not sign transaction')
   }
 
   async signAllTransactions(
     txs: web3.Transaction[],
   ): Promise<web3.Transaction[]> {
-    throw new Error('')
+    throw new Error('Raw Wallet can not sign all transaction')
   }
 }

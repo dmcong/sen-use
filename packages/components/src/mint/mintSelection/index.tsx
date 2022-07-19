@@ -11,6 +11,7 @@ export type MintSelectionProps = {
   style?: CSSProperties
   disabled?: boolean
   nativeSol?: boolean
+  placeholder?: string
 }
 
 const MintSelection = ({
@@ -19,6 +20,7 @@ const MintSelection = ({
   style = {},
   disabled = false,
   nativeSol = false,
+  placeholder,
 }: MintSelectionProps) => {
   const [visible, setVisible] = useState(false)
 
@@ -32,7 +34,11 @@ const MintSelection = ({
       >
         <Space>
           <MintAvatar mintAddress={value} />
-          <MintSymbol mintAddress={value} />
+          {placeholder && !value ? (
+            placeholder
+          ) : (
+            <MintSymbol mintAddress={value} />
+          )}
           <IonIcon name="chevron-down-outline" />
         </Space>
       </Button>
