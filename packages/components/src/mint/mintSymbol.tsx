@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { account } from '@senswap/sen-js'
 import { useMint, usePool } from '@sentre/senhub'
+import { Address } from '@project-serum/anchor'
 
 const DEFAULT_SYMBOL = 'TOKN'
 
@@ -16,7 +17,7 @@ const MintSymbol = ({
   separator = ' • ',
   reversed = false,
 }: {
-  mintAddress: string
+  mintAddress: Address
   separator?: string
   reversed?: boolean
 }) => {
@@ -34,7 +35,8 @@ const MintSymbol = ({
   )
 
   const deriveSymbols = useCallback(async () => {
-    if (!account.isAddress(mintAddress)) return setSymbol(DEFAULT_SYMBOL)
+    if (!account.isAddress(mintAddress.toString()))
+      return setSymbol(DEFAULT_SYMBOL)
     // LP mint
     const poolData = Object.values(pools || {}).find(
       ({ mint_lpt }) => mint_lpt === mintAddress,
@@ -46,7 +48,7 @@ const MintSymbol = ({
       return setSymbol(symbols.join(separator))
     }
     // Normal mint
-    const symbol = await deriveSymbol(mintAddress)
+    const symbol = await deriveSymbol(mintAddress.toString())
     return setSymbol(symbol)
   }, [mintAddress, reversed, deriveSymbol, pools, separator])
 

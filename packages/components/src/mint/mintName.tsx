@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { account } from '@senswap/sen-js'
 import { useMint, usePool } from '@sentre/senhub'
+import { Address } from '@project-serum/anchor'
 
 const DEFAULT_NAME = 'Unknown Token'
 
@@ -16,7 +17,7 @@ const MintName = ({
   separator = ' • ',
   reversed = false,
 }: {
-  mintAddress: string
+  mintAddress: Address
   separator?: string
   reversed?: boolean
 }) => {
@@ -34,7 +35,7 @@ const MintName = ({
   )
 
   const deriveNames = useCallback(async () => {
-    if (!account.isAddress(mintAddress)) return setName(DEFAULT_NAME)
+    if (!account.isAddress(mintAddress.toString())) return setName(DEFAULT_NAME)
     // LP mint
     const poolData = Object.values(pools || {}).find(
       ({ mint_lpt }) => mint_lpt === mintAddress,
@@ -46,7 +47,7 @@ const MintName = ({
       return setName(`${names.join(separator)} LP`)
     }
     // Normal mint
-    const name = await deriveName(mintAddress)
+    const name = await deriveName(mintAddress.toString())
     return setName(name)
   }, [mintAddress, reversed, deriveName, pools, separator])
 

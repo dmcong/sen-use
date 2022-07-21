@@ -1,6 +1,7 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { account } from '@senswap/sen-js'
 import { useMint, usePool } from '@sentre/senhub'
+import { Address } from '@project-serum/anchor'
 
 import { Avatar } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
@@ -9,7 +10,7 @@ const DEFAULT_AVATARS: Array<string | undefined> = [undefined]
 
 export type MintAvatarProps = {
   key?: string
-  mintAddress: string
+  mintAddress: Address
   size?: number
   icon?: ReactNode
   reversed?: boolean
@@ -45,7 +46,8 @@ const MintAvatar = ({
   )
 
   const deriveAvatars = useCallback(async () => {
-    if (!account.isAddress(mintAddress)) return setAvatars(DEFAULT_AVATARS)
+    if (!account.isAddress(mintAddress.toString()))
+      return setAvatars(DEFAULT_AVATARS)
     // LP mint
     const poolData = Object.values(pools || {}).find(
       ({ mint_lpt }) => mint_lpt === mintAddress,
@@ -57,7 +59,7 @@ const MintAvatar = ({
       return setAvatars(avatars)
     }
     // Normal mint
-    const avatar = await deriveAvatar(mintAddress)
+    const avatar = await deriveAvatar(mintAddress.toString())
     return setAvatars([avatar])
   }, [mintAddress, reversed, deriveAvatar, pools])
 
