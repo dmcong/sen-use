@@ -7,6 +7,7 @@ import {
 import { sha256 } from 'js-sha256'
 import camelcase from 'camelcase'
 import { snakeCase } from 'snake-case'
+import bs58 from 'bs58'
 
 import { getRawProgram } from '../utils'
 import { AllAccounts, AllInstructions, IxAgrsData } from './types'
@@ -35,6 +36,9 @@ export const ixDiscriminator = (ixName: string): Buffer => {
   let preimage = `global:${name}`
   return Buffer.from(sha256.digest(preimage)).slice(0, DISCRIMINATOR_SIZE)
 }
+
+export const encodeIxData = bs58.encode
+export const decodeIxData = bs58.decode
 
 export class IdlParser<T extends Idl> {
   program: Program<T>

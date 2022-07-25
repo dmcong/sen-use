@@ -1,0 +1,411 @@
+[
+    {
+        "blockTime": 1658738764,
+        "meta": {
+            "err": null,
+            "fee": 5000,
+            "innerInstructions": [],
+            "loadedAddresses": {
+                "readonly": [],
+                "writable": []
+            },
+            "logMessages": [
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u invoke [1]",
+                "Program log: Instruction: UpdateWeights",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u consumed 7235 of 400000 compute units",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u success",
+                "Program 11111111111111111111111111111111 invoke [1]",
+                "Program 11111111111111111111111111111111 success"
+            ],
+            "postBalances": [
+                35291339842,
+                47992884425,
+                6382320,
+                1,
+                1141440
+            ],
+            "postTokenBalances": [],
+            "preBalances": [
+                35291349842,
+                47992879425,
+                6382320,
+                1,
+                1141440
+            ],
+            "preTokenBalances": [],
+            "rewards": [],
+            "status": {
+                "Ok": null
+            }
+        },
+        "slot": 150375880,
+        "transaction": {
+            "message": {
+                "accountKeys": [
+                    {
+                        "pubkey": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                        "signer": true,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "11111111111111111111111111111111",
+                        "signer": false,
+                        "writable": false
+                    },
+                    {
+                        "pubkey": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u",
+                        "signer": false,
+                        "writable": false
+                    }
+                ],
+                "addressTableLookups": null,
+                "instructions": [
+                    {
+                        "accounts": [
+                            "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                            "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb"
+                        ],
+                        "data": "2ymNoWrDxrR1sUpY4ig7MP8eSCHLWLEJLNeBktf",
+                        "programId": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u"
+                    },
+                    {
+                        "parsed": {
+                            "info": {
+                                "destination": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                                "lamports": 5000,
+                                "source": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk"
+                            },
+                            "type": "transfer"
+                        },
+                        "program": "system",
+                        "programId": "11111111111111111111111111111111"
+                    }
+                ],
+                "recentBlockhash": "75P5tp9jGLzux45TyLUAGajrhqJ9GhsdgQgLhdW89hz6"
+            },
+            "signatures": [
+                "3hqopMfwastA7yn3jygS7RLyCz8k122u422PqMPop7YpJvW1X1CC6muiefxoaP7Z1mwK91kfLBENtkvS1zzgcLes"
+            ]
+        }
+    },
+    {
+        "blockTime": 1658738730,
+        "meta": {
+            "err": null,
+            "fee": 5000,
+            "innerInstructions": [],
+            "loadedAddresses": {
+                "readonly": [],
+                "writable": []
+            },
+            "logMessages": [
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u invoke [1]",
+                "Program log: Instruction: UpdateFee",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u consumed 6919 of 400000 compute units",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u success",
+                "Program 11111111111111111111111111111111 invoke [1]",
+                "Program 11111111111111111111111111111111 success"
+            ],
+            "postBalances": [
+                35291349842,
+                47992879425,
+                6382320,
+                1,
+                1141440
+            ],
+            "postTokenBalances": [],
+            "preBalances": [
+                35291359842,
+                47992874425,
+                6382320,
+                1,
+                1141440
+            ],
+            "preTokenBalances": [],
+            "rewards": [],
+            "status": {
+                "Ok": null
+            }
+        },
+        "slot": 150375790,
+        "transaction": {
+            "message": {
+                "accountKeys": [
+                    {
+                        "pubkey": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                        "signer": true,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "11111111111111111111111111111111",
+                        "signer": false,
+                        "writable": false
+                    },
+                    {
+                        "pubkey": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u",
+                        "signer": false,
+                        "writable": false
+                    }
+                ],
+                "addressTableLookups": null,
+                "instructions": [
+                    {
+                        "accounts": [
+                            "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                            "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb"
+                        ],
+                        "data": "NEwmSYj96kB5XKXnQYDszwzQATp6EFRWo",
+                        "programId": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u"
+                    },
+                    {
+                        "parsed": {
+                            "info": {
+                                "destination": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                                "lamports": 5000,
+                                "source": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk"
+                            },
+                            "type": "transfer"
+                        },
+                        "program": "system",
+                        "programId": "11111111111111111111111111111111"
+                    }
+                ],
+                "recentBlockhash": "DeV7Syo83YHYb2EQxFri6nfx2AfdMbSo2krjvoiXxCW4"
+            },
+            "signatures": [
+                "5mvnSnZ9eKTRFdtVgmNnKs7rpFk2GYR9cb4iQ8zcNv9NWekmekaPYCVPQqdbRYtHP91UkB2BJLRHshzDomTpDs9d"
+            ]
+        }
+    },
+    {
+        "blockTime": 1658734399,
+        "meta": {
+            "err": null,
+            "fee": 5000,
+            "innerInstructions": [],
+            "loadedAddresses": {
+                "readonly": [],
+                "writable": []
+            },
+            "logMessages": [
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u invoke [1]",
+                "Program log: Instruction: ThawPool",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u consumed 6823 of 400000 compute units",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u success",
+                "Program 11111111111111111111111111111111 invoke [1]",
+                "Program 11111111111111111111111111111111 success"
+            ],
+            "postBalances": [
+                35291359842,
+                47992874425,
+                6382320,
+                1,
+                1141440
+            ],
+            "postTokenBalances": [],
+            "preBalances": [
+                35291369842,
+                47992869425,
+                6382320,
+                1,
+                1141440
+            ],
+            "preTokenBalances": [],
+            "rewards": [],
+            "status": {
+                "Ok": null
+            }
+        },
+        "slot": 150364392,
+        "transaction": {
+            "message": {
+                "accountKeys": [
+                    {
+                        "pubkey": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                        "signer": true,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "11111111111111111111111111111111",
+                        "signer": false,
+                        "writable": false
+                    },
+                    {
+                        "pubkey": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u",
+                        "signer": false,
+                        "writable": false
+                    }
+                ],
+                "addressTableLookups": null,
+                "instructions": [
+                    {
+                        "accounts": [
+                            "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                            "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb"
+                        ],
+                        "data": "R752cMAJBnY",
+                        "programId": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u"
+                    },
+                    {
+                        "parsed": {
+                            "info": {
+                                "destination": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                                "lamports": 5000,
+                                "source": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk"
+                            },
+                            "type": "transfer"
+                        },
+                        "program": "system",
+                        "programId": "11111111111111111111111111111111"
+                    }
+                ],
+                "recentBlockhash": "9HeDo9aXVcZSwio9fwKtd5Vh52PmfeSc4WwcwEoJm1Gj"
+            },
+            "signatures": [
+                "5wrsu74hQtbyCsK9WLiwE4DxzU4VPwptjsKtK4ASyBWodG2rAHYy7eFhWxpUjvdYy4CWpTmZpaLAdwQ8GUpTGj3F"
+            ]
+        }
+    },
+    {
+        "blockTime": 1658734378,
+        "meta": {
+            "err": {
+                "InstructionError": [
+                    0,
+                    {
+                        "Custom": 6009
+                    }
+                ]
+            },
+            "fee": 5000,
+            "innerInstructions": [],
+            "loadedAddresses": {
+                "readonly": [],
+                "writable": []
+            },
+            "logMessages": [
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u invoke [1]",
+                "Program log: Instruction: FreezePool",
+                "Program log: AnchorError thrown in programs/balancer-amm/src/instructions/admin/freeze_pool.rs:17. Error Code: PoolNotActive. Error Number: 6009. Error Message: Pool is not active!.",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u consumed 7104 of 400000 compute units",
+                "Program Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u failed: custom program error: 0x1779"
+            ],
+            "postBalances": [
+                35291369842,
+                47992869425,
+                6382320,
+                1,
+                1141440
+            ],
+            "postTokenBalances": [],
+            "preBalances": [
+                35291374842,
+                47992869425,
+                6382320,
+                1,
+                1141440
+            ],
+            "preTokenBalances": [],
+            "rewards": [],
+            "status": {
+                "Err": {
+                    "InstructionError": [
+                        0,
+                        {
+                            "Custom": 6009
+                        }
+                    ]
+                }
+            }
+        },
+        "slot": 150364336,
+        "transaction": {
+            "message": {
+                "accountKeys": [
+                    {
+                        "pubkey": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                        "signer": true,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb",
+                        "signer": false,
+                        "writable": true
+                    },
+                    {
+                        "pubkey": "11111111111111111111111111111111",
+                        "signer": false,
+                        "writable": false
+                    },
+                    {
+                        "pubkey": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u",
+                        "signer": false,
+                        "writable": false
+                    }
+                ],
+                "addressTableLookups": null,
+                "instructions": [
+                    {
+                        "accounts": [
+                            "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk",
+                            "ETgDpkkFaHLKMoUHCtztNbovfx1CzMzdPCa6qDSf9KPb"
+                        ],
+                        "data": "cS9hebQaewF",
+                        "programId": "Hxzy3cvdPz48RodavEN4P41TZp4g6Vd1kEMaUiZMof1u"
+                    },
+                    {
+                        "parsed": {
+                            "info": {
+                                "destination": "8UaZw2jDhJzv5V53569JbCd3bD4BnyCfBH3sjwgajGS9",
+                                "lamports": 5000,
+                                "source": "BkLRcJucoTF9GnxQUa94fkqZdoL9LTWCoT5gF54zVsJk"
+                            },
+                            "type": "transfer"
+                        },
+                        "program": "system",
+                        "programId": "11111111111111111111111111111111"
+                    }
+                ],
+                "recentBlockhash": "4CKGU1UV8qxz1t9WxjSypo1xpDMiug9ZqiP1RgmHc8Rc"
+            },
+            "signatures": [
+                "3eXXjuxHi9TmrG7PNgTpZEb1FyQ1rwvRCGhqb8YvQDhnK8Rk6shYAdaYbswViUxs2NxumkphJbNwkVt1sNV1T1dG"
+            ]
+        }
+    }
+]

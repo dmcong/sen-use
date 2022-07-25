@@ -1,40 +1,22 @@
-import { Web3Storage } from 'web3.storage'
-import { DataLoader } from './dataloader'
+import { File, Web3Storage } from 'web3.storage'
+
 import { CID } from 'multiformats/cid'
+import { DataLoader } from './dataloader'
 
-const mapSingleton = new Map<string, Web3Storage>()
-
-function getSingleton(key: string, endpoint: string): Web3Storage {
-  const id = `${key}:${endpoint}`
-  let instance = mapSingleton.get(id)
-  if (instance) return instance
-  // create new instance
-  instance = new Web3Storage({
-    endpoint: new URL(endpoint),
-    token: key,
-  })
-  mapSingleton.set(id, instance)
-  return getSingleton(key, endpoint)
-}
-
-export class IPFS {
+export class IPFS<
+  MapTypes extends Record<string, any>,
+  T extends Array<keyof MapTypes>,
+> {
   private provider: Web3Storage
   constructor(
     private key: string,
+    private IDL: T,
     private endpoint = 'https://api.web3.storage',
   ) {
-    this.provider = getSingleton(this.key, this.endpoint)
-  }
-
-  set = async (data: object) => {
-    const file = new File([JSON.stringify(data)], 'file', {
-      type: 'application/json',
+    this.provider = new Web3Storage({
+      endpoint: new URL(this.endpoint),
+      token: this.key,
     })
-    const cid = await this.provider.put([file])
-    const {
-      multihash: { digest },
-    } = CID.parse(cid)
-    return { cid, digest }
   }
 
   decodeCID = (digest: string | Buffer | Uint8Array | number[]) => {
@@ -47,11 +29,40 @@ export class IPFS {
     return cid.toString()
   }
 
-  get = async <T>(
+  get methods() {
+    const methods: {
+      [x in T[number]]: {
+        get: (
+          digest: string | Buffer | Uint8Array | number[],
+        ) => Promise<MapTypes[x]>
+        set: (data: MapTypes[x]) => Promise<{ cid: string; digest: Uint8Array }>
+      }
+    } = {} as any
+    for (const elm of this.IDL) {
+      methods[elm] = {
+        set: (data) => this.set(data),
+        get: (digest) => this.get(digest),
+      }
+    }
+    return methods
+  }
+
+  private async set(data: any): Promise<any> {
+    const file = new File([JSON.stringify(data)], 'file', {
+      type: 'application/json',
+    })
+    const cid = await this.provider.put([file])
+    const {
+      multihash: { digest },
+    } = CID.parse(cid)
+    return { cid, digest }
+  }
+
+  private async get(
     digest: string | Buffer | Uint8Array | number[],
-  ): Promise<T> => {
+  ): Promise<any> {
     const cid = this.decodeCID(digest)
-    return DataLoader.load<T>(`ipfs:${cid}`, async () => {
+    return DataLoader.load(`ipfs:${cid}`, async () => {
       const re = await this.provider.get(cid)
       const file = ((await re?.files()) || [])[0]
       const reader = new FileReader()
