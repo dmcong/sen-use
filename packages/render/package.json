@@ -1,10 +1,10 @@
 {
   "name": "render",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
-    "@sen-use/components": "^1.2.5",
+    "@sen-use/components": "^1.2.6",
     "@senswap/sen-js": "^1.4.0",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
