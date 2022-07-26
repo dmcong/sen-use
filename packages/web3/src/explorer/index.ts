@@ -16,7 +16,7 @@ export type OptionsFetchSignature = {
 }
 
 export class SolanaExplorer {
-  private conn: Connection = new Connection('https://devnet.genesysgo.net/')
+  constructor(private conn: Connection) {}
 
   //Search for all signatures from last Signature and earlier
   //So: If new collection (to now) -> last Signature = null

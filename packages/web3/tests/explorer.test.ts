@@ -1,8 +1,11 @@
+import { Connection } from '@solana/web3.js'
 import { SolanaExplorer } from '../src/explorer'
 const fs = require('fs')
 
+const conn: Connection = new Connection('https://devnet.genesysgo.net/')
+
 describe('rpc test', () => {
-  const SolanaExporer = new SolanaExplorer()
+  const SolanaExporer = new SolanaExplorer(conn)
 
   it('Fetch multi address!', async () => {
     const transactions = await SolanaExporer.fetchTransactions(
