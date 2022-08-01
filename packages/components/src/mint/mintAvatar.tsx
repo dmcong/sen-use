@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { account } from '@senswap/sen-js'
 import { useMint, usePool } from '@sentre/senhub'
 import { Address } from '@project-serum/anchor'
@@ -36,6 +36,8 @@ const MintAvatar = ({
   const { tokenProvider } = useMint()
   const { pools } = usePool()
 
+  const mint = useMemo(() => mintAddress.toString(), [mintAddress])
+
   const deriveAvatar = useCallback(
     async (address: string) => {
       const token = await tokenProvider.findByAddress(address)
@@ -46,11 +48,10 @@ const MintAvatar = ({
   )
 
   const deriveAvatars = useCallback(async () => {
-    if (!account.isAddress(mintAddress.toString()))
-      return setAvatars(DEFAULT_AVATARS)
+    if (!account.isAddress(mint)) return setAvatars(DEFAULT_AVATARS)
     // LP mint
     const poolData = Object.values(pools || {}).find(
-      ({ mint_lpt }) => mint_lpt === mintAddress,
+      ({ mint_lpt }) => mint_lpt === mint,
     )
     if (poolData) {
       const { mint_a, mint_b } = poolData
@@ -59,9 +60,9 @@ const MintAvatar = ({
       return setAvatars(avatars)
     }
     // Normal mint
-    const avatar = await deriveAvatar(mintAddress.toString())
+    const avatar = await deriveAvatar(mint)
     return setAvatars([avatar])
-  }, [mintAddress, reversed, deriveAvatar, pools])
+  }, [mint, reversed, deriveAvatar, pools])
 
   useEffect(() => {
     deriveAvatars()

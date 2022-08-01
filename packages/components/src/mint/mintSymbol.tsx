@@ -1,9 +1,15 @@
-import { useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { account } from '@senswap/sen-js'
 import { useMint, usePool } from '@sentre/senhub'
 import { Address } from '@project-serum/anchor'
 
 const DEFAULT_SYMBOL = 'TOKN'
+
+type MintSymbolProps = {
+  mintAddress: Address
+  separator?: string
+  reversed?: boolean
+}
 
 /**
  * Mint/Token symbol, supporting LP tokens
@@ -12,51 +18,46 @@ const DEFAULT_SYMBOL = 'TOKN'
  * @param reversed - (Optional) The default LP token symbol is A-B. The reversed is to change it to B-A
  * @returns symbol
  */
-const MintSymbol = ({
-  mintAddress,
-  separator = ' • ',
-  reversed = false,
-}: {
-  mintAddress: Address
-  separator?: string
-  reversed?: boolean
-}) => {
-  const [symbol, setSymbol] = useState(DEFAULT_SYMBOL)
-  const { tokenProvider } = useMint()
-  const { pools } = usePool()
+const MintSymbol = memo(
+  ({ mintAddress, separator = ' • ', reversed = false }: MintSymbolProps) => {
+    const [symbol, setSymbol] = useState(DEFAULT_SYMBOL)
+    const { tokenProvider } = useMint()
+    const { pools } = usePool()
 
-  const deriveSymbol = useCallback(
-    async (address: string) => {
-      const token = await tokenProvider.findByAddress(address)
-      if (token?.symbol) return token.symbol
-      return address.substring(0, 4)
-    },
-    [tokenProvider],
-  )
+    const mint = useMemo(() => mintAddress.toString(), [mintAddress])
 
-  const deriveSymbols = useCallback(async () => {
-    if (!account.isAddress(mintAddress.toString()))
-      return setSymbol(DEFAULT_SYMBOL)
-    // LP mint
-    const poolData = Object.values(pools || {}).find(
-      ({ mint_lpt }) => mint_lpt === mintAddress,
+    const deriveSymbol = useCallback(
+      async (address: string) => {
+        const token = await tokenProvider.findByAddress(address)
+        if (token?.symbol) return token.symbol
+        return address.substring(0, 4)
+      },
+      [tokenProvider],
     )
-    if (poolData) {
-      const { mint_a, mint_b } = poolData
-      const symbols = await Promise.all([mint_a, mint_b].map(deriveSymbol))
-      if (reversed) symbols.reverse()
-      return setSymbol(symbols.join(separator))
-    }
-    // Normal mint
-    const symbol = await deriveSymbol(mintAddress.toString())
-    return setSymbol(symbol)
-  }, [mintAddress, reversed, deriveSymbol, pools, separator])
 
-  useEffect(() => {
-    deriveSymbols()
-  }, [deriveSymbols])
+    const deriveSymbols = useCallback(async () => {
+      if (!account.isAddress(mint)) return setSymbol(DEFAULT_SYMBOL)
+      // LP mint
+      const poolData = Object.values(pools || {}).find(
+        ({ mint_lpt }) => mint_lpt === mint,
+      )
+      if (poolData) {
+        const { mint_a, mint_b } = poolData
+        const symbols = await Promise.all([mint_a, mint_b].map(deriveSymbol))
+        if (reversed) symbols.reverse()
+        return setSymbol(symbols.join(separator))
+      }
+      // Normal mint
+      const symbol = await deriveSymbol(mint.toString())
+      return setSymbol(symbol)
+    }, [mint, reversed, deriveSymbol, pools, separator])
 
-  return <span>{symbol + ' '}</span>
-}
+    useEffect(() => {
+      deriveSymbols()
+    }, [deriveSymbols])
+
+    return <span>{symbol + ' '}</span>
+  },
+)
 
 export default MintSymbol
