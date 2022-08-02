@@ -9,6 +9,8 @@ import IonIcon from '@sentre/antd-ionicon'
 import { AppDispatch, AppState } from 'model'
 import { increaseCounter } from 'model/main.controller'
 import configs from 'configs'
+import { NFTSelection } from './NFT'
+import { searchNFTType } from './NFT/NFTSelection'
 
 const {
   manifest: { appId },
@@ -26,6 +28,9 @@ const View = () => {
   useEffect(() => {
     if (pdb) pdb.setItem('counter', counter)
   }, [pdb, counter])
+  const onSelectNFT = (mintAddress: string) => {
+    console.log('Address: ', mintAddress)
+  }
 
   return (
     <Row gutter={[24, 24]} align="middle">
@@ -45,6 +50,15 @@ const View = () => {
         <Button onClick={increase}>Increase</Button>
       </Col>
       <MintSelection />
+      <NFTSelection
+        collectionAddress="3NKWipp36DnCyQk2LQmXbret2U2M816GWBCvHQAaMyFT"
+        onSelect={onSelectNFT}
+      />
+      <NFTSelection
+        searchNFTby={searchNFTType.collections}
+        title="Select NFT collection"
+        onSelect={onSelectNFT}
+      />
     </Row>
   )
 }
