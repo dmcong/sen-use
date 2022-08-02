@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 
-import { Row, Col, Typography, Image, Spin, Button, Space } from 'antd'
-import IonIcon from '@sentre/antd-ionicon'
+import { Row, Col, Typography, Image, Spin } from 'antd'
 import Address from './address'
 
 import useNftMetaData from './hooks/useNftMetaData'
@@ -37,7 +36,7 @@ const CardNFT = ({
       <Row gutter={[16, 16]} style={{ cursor: 'pointer' }}>
         <Col
           span={24}
-          style={{ textAlign: 'center', width: size || undefined }}
+          style={{ textAlign: 'center', width: size }}
           onClick={() => (onSelect ? onSelect(mintAddress) : null)}
         >
           <Image

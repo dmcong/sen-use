@@ -29,7 +29,7 @@ class SearchEngine {
   search = (keyword: string, limit = 100) => {
     let filterNFTs: string[] = []
     if (!keyword) return []
-    const fuzzy = `*${keyword}* ${keyword}`
+    const fuzzy = `${keyword} *${keyword}*`
     this.index.search(fuzzy).forEach(({ ref }) => {
       if (!filterNFTs.includes(ref)) return filterNFTs.push(ref)
     })
