@@ -12,15 +12,17 @@ const {
 } = configs
 
 export const Page = () => {
-  const configProviderAntd = {
-    getPopupContainer: () => document.getElementById(appId) as HTMLElement,
-    prefixCls: appId,
-  }
-  ConfigProvider({ ...configProviderAntd })
-
   return (
     <Provider store={model}>
-      <View />
+      <section id={appId} style={{ background: 'transparent' }}>
+        <ConfigProvider
+          getPopupContainer={() =>
+            document.getElementById(appId) as HTMLElement
+          }
+        >
+          <View />
+        </ConfigProvider>
+      </section>
     </Provider>
   )
 }
