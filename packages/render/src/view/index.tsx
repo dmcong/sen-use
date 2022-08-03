@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useWallet, createPDB } from '@sentre/senhub'
-import { MintSelection } from '@sen-use/components'
+import { MintSelection, NFTSelection, searchNFTType } from '@sen-use/components'
 
 import { Row, Col, Typography, Button, Space } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
@@ -45,6 +45,11 @@ const View = () => {
         <Button onClick={increase}>Increase</Button>
       </Col>
       <MintSelection />
+      <NFTSelection />
+      <NFTSelection
+        searchNFTby={searchNFTType.collections}
+        title="Select NFT collection"
+      />
     </Row>
   )
 }
