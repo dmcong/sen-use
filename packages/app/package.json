@@ -1,6 +1,6 @@
 {
   "name": "@sen-use/app",
-  "version": "1.2.8",
+  "version": "2.0.1",
   "author": "Michael",
   "repository": "git+https://github.com/dmcong/sen-use.git",
   "license": "MIT",
@@ -36,10 +36,10 @@
     "@types/react-dom": "17.0.11"
   },
   "peerDependencies": {
-    "react": "^17.0.39",
-    "react-dom": "^17.0.11",
     "@sen-use/components": "^1.2.8",
-    "@sen-use/web3": "^1.2.8"
+    "@sen-use/web3": "^1.2.8",
+    "react": "^17.0.39",
+    "react-dom": "^17.0.11"
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0-alpha.5",
