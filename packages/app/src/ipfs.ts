@@ -5,8 +5,8 @@ import { CID } from 'multiformats/cid'
 import { DataLoader } from '@sen-use/web3'
 
 var store = localforage.createInstance({
-  name: 'ipfs-cache',
-  storeName: 'ipfs-cache',
+  name: 'cache-ipfs',
+  storeName: 'cache-ipfs',
 })
 
 export class IPFS<
@@ -61,25 +61,48 @@ export class IPFS<
     const {
       multihash: { digest },
     } = CID.parse(cid)
-
-    try {
-      if (cache) await store.setItem(cid, data)
-    } catch (error) {
-      console.log('error-ipfs-cache-set:', error)
+    // Save IPFS to cache
+    if (cache) {
+      try {
+        await store.setItem(this.decodeCID(digest), { data, checked: false })
+      } catch (error) {
+        console.log('error-ipfs-cache-set:', error)
+      }
     }
+
     return { cid, digest }
   }
 
   private async get(
     digest: string | Buffer | Uint8Array | number[],
+    cache = true,
   ): Promise<any> {
     const cid = this.decodeCID(digest)
     return DataLoader.load(`ipfs:${cid}`, async () => {
-      try {
-        const cacheData = await store.getItem(cid)
-        if (cacheData) return cacheData
-      } catch (error) {
-        console.log('error-ipfs-cache-get:', error)
+      // Check cache data
+      if (cache) {
+        try {
+          const cacheData = await store.getItem<any>(cid)
+          console.log('cacheData', cacheData)
+          if (cacheData) {
+            const { data, checked } = cacheData
+            if (!checked) {
+              // Recheck data on IPFS
+              try {
+                this.get(digest, false).then((rp) => {
+                  console.log('rp', rp)
+                  if (!!rp) store.setItem(cid, { data: rp, checked: true })
+                })
+              } catch (error) {
+                console.log('error check')
+                this.set(data)
+              }
+            }
+            return data
+          }
+        } catch (error) {
+          console.log('error-ipfs-cache-get:', error)
+        }
       }
 
       const re = await this.provider.get(cid)
@@ -92,8 +115,9 @@ export class IPFS<
             const contents = reader.result?.toString()
             if (!contents) throw new Error('Cannot read empty file')
             const ipfsData = JSON.parse(contents)
+            // Set status cache data
             try {
-              await store.setItem(cid, ipfsData)
+              await store.setItem(cid, { data: ipfsData, checked: true })
             } catch (error) {
               console.log('error-ipfs-cache-set:', error)
             }
