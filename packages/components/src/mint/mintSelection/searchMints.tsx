@@ -37,15 +37,11 @@ const SearchMints = ({
   const { recommendedMints, addRecommendMint } = useRecommendedMints()
   const { searchedMints, loading } = useSearchedMints(keyword)
 
-  const listMint = useMemo(() => {
+  const filteredMints = useMemo(() => {
     if (!mints.length) return searchedMints
     if (!keyword) return mints
 
-    let filteredMints: string[] = []
-    for (const mint of mints) {
-      if (searchedMints.includes(mint)) filteredMints.push(mint)
-    }
-    return filteredMints
+    return mints.filter((mint) => searchedMints.includes(mint))
   }, [keyword, mints, searchedMints])
 
   const onSelect = useCallback(
@@ -115,8 +111,8 @@ const SearchMints = ({
                 <SolCard onClick={onSelect} />
               </Col>
             )}
-            {listMint.length || loading ? (
-              listMint.slice(0, offset).map((mintAddress, index) => (
+            {filteredMints.length || loading ? (
+              filteredMints.slice(0, offset).map((mintAddress, index) => (
                 <Col span={24} key={mintAddress + index}>
                   <LazyLoad height={60} overflow throttle={300}>
                     <MintCard mintAddress={mintAddress} onClick={onSelect} />
