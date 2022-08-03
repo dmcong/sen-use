@@ -2,7 +2,7 @@ import {
   ConfirmedSignatureInfo,
   ConfirmedSignaturesForAddress2Options,
   Connection,
-  ParsedConfirmedTransaction,
+  ParsedTransactionWithMeta,
   PublicKey,
 } from '@solana/web3.js'
 
@@ -34,16 +34,14 @@ export class SolanaExplorer {
   }
 
   private async fetchConfirmTransaction(signatures: string[]) {
-    let confirmedTransactions: ParsedConfirmedTransaction[] = []
+    let confirmedTransactions: ParsedTransactionWithMeta[] = []
     let limit = TRANSACTION_LIMIT
 
     const promiseTransGroup = []
     for (let offset = 0; offset <= signatures.length / limit; offset++) {
       const skip = offset * limit
       const signaturesGroup = signatures.slice(skip, skip + limit)
-      promiseTransGroup.push(
-        this.conn.getParsedConfirmedTransactions(signaturesGroup),
-      )
+      promiseTransGroup.push(this.conn.getParsedTransactions(signaturesGroup))
     }
 
     const transGroups = await Promise.all(promiseTransGroup)
@@ -54,10 +52,7 @@ export class SolanaExplorer {
     return confirmedTransactions
   }
 
-  async fetchTransactions(
-    programId: string,
-    options: OptionsFetchSignature,
-  ): Promise<ParsedConfirmedTransaction[]> {
+  async fetchTransactions(programId: string, options: OptionsFetchSignature) {
     const currentTime = new Date().getTime() / 1000
     let { secondFrom, secondTo, lastSignature, limit } = options
     secondFrom = Math.floor(secondFrom || 0)
