@@ -88,10 +88,16 @@ export class IPFS<
       return new Promise((resolve, reject) => {
         try {
           if (!file) throw new Error('Cannot read empty file')
-          reader.onload = () => {
+          reader.onload = async () => {
             const contents = reader.result?.toString()
             if (!contents) throw new Error('Cannot read empty file')
-            return resolve(JSON.parse(contents))
+            const ipfsData = JSON.parse(contents)
+            try {
+              await store.setItem(cid, ipfsData)
+            } catch (error) {
+              console.log('error-ipfs-cache-set:', error)
+            }
+            return resolve(ipfsData)
           }
           reader.readAsText(file)
         } catch (er: any) {
