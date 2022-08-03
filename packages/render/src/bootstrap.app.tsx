@@ -1,15 +1,10 @@
 import { Provider } from 'react-redux'
-import {
-  WalletProvider,
-  UIProvider,
-  MintProvider,
-  AccountProvider,
-  PoolProvider,
-} from '@sentre/senhub'
+import { ConfigProvider } from 'antd'
 
 import View from 'view'
 
 import model from 'model'
+
 import configs from 'configs'
 
 const {
@@ -17,20 +12,16 @@ const {
 } = configs
 
 export const Page = () => {
+  const configProviderAntd = {
+    getPopupContainer: () => document.getElementById(appId) as HTMLElement,
+    prefixCls: appId,
+  }
+  ConfigProvider({ ...configProviderAntd })
+
   return (
-    <UIProvider appId={appId} antd>
-      <WalletProvider>
-        <MintProvider>
-          <AccountProvider>
-            <PoolProvider>
-              <Provider store={model}>
-                <View />
-              </Provider>
-            </PoolProvider>
-          </AccountProvider>
-        </MintProvider>
-      </WalletProvider>
-    </UIProvider>
+    <Provider store={model}>
+      <View />
+    </Provider>
   )
 }
 

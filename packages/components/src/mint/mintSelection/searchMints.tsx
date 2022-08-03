@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import LazyLoad from '@sentre/react-lazyload'
 
 import { Button, Empty, Col, Input, Row, Spin } from 'antd'
@@ -21,6 +21,7 @@ export type SearchMintsProps = {
   visible?: boolean
   onClose?: () => void
   nativeSol?: boolean
+  mints?: string[]
 }
 
 const SearchMints = ({
@@ -29,11 +30,23 @@ const SearchMints = ({
   onClose = () => {},
   visible,
   nativeSol = false,
+  mints = [],
 }: SearchMintsProps) => {
   const [keyword, setKeyword] = useState('')
   const [offset, setOffset] = useState(LIMIT)
   const { recommendedMints, addRecommendMint } = useRecommendedMints()
   const { searchedMints, loading } = useSearchedMints(keyword)
+
+  const listMint = useMemo(() => {
+    if (!mints.length) return searchedMints
+    if (!keyword) return mints
+
+    let filteredMints: string[] = []
+    for (const mint of mints) {
+      if (searchedMints.includes(mint)) filteredMints.push(mint)
+    }
+    return filteredMints
+  }, [keyword, mints, searchedMints])
 
   const onSelect = useCallback(
     (mintAddress: string) => {
@@ -102,8 +115,8 @@ const SearchMints = ({
                 <SolCard onClick={onSelect} />
               </Col>
             )}
-            {searchedMints.length || loading ? (
-              searchedMints.slice(0, offset).map((mintAddress, index) => (
+            {listMint.length || loading ? (
+              listMint.slice(0, offset).map((mintAddress, index) => (
                 <Col span={24} key={mintAddress + index}>
                   <LazyLoad height={60} overflow throttle={300}>
                     <MintCard mintAddress={mintAddress} onClick={onSelect} />
