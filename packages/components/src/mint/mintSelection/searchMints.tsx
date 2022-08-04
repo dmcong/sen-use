@@ -34,7 +34,8 @@ const SearchMints = ({
 }: SearchMintsProps) => {
   const [keyword, setKeyword] = useState('')
   const [offset, setOffset] = useState(LIMIT)
-  const { recommendedMints, addRecommendMint } = useRecommendedMints()
+  const { recommendedMints, addRecommendMint, removeRecommendMint } =
+    useRecommendedMints()
   const { searchedMints, loading } = useSearchedMints(keyword)
 
   const filteredMints = useMemo(() => {
@@ -89,6 +90,7 @@ const SearchMints = ({
                 mintAddress={mintAddress}
                 onClick={onSelect}
                 active={mintAddress === value}
+                onRemove={removeRecommendMint}
               />
             </Col>
           ))}

@@ -59,7 +59,6 @@ const MintSelection = ({
         closable={false}
         centered
         className="mint-select-modal"
-        destroyOnClose
       >
         <SearchMints
           onChange={onSelect}

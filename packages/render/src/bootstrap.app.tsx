@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux'
-import { ConfigProvider } from 'antd'
+import { UIProvider } from '@sentre/senhub'
 
 import View from 'view'
 
@@ -14,15 +14,9 @@ const {
 export const Page = () => {
   return (
     <Provider store={model}>
-      <section id={appId} style={{ background: 'transparent' }}>
-        <ConfigProvider
-          getPopupContainer={() =>
-            document.getElementById(appId) as HTMLElement
-          }
-        >
-          <View />
-        </ConfigProvider>
-      </section>
+      <UIProvider appId={appId} antd>
+        <View />
+      </UIProvider>
     </Provider>
   )
 }
