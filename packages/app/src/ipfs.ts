@@ -69,7 +69,6 @@ export class IPFS<
         console.log('error-ipfs-cache-set:', error)
       }
     }
-
     return { cid, digest }
   }
 
@@ -83,18 +82,15 @@ export class IPFS<
       if (cache) {
         try {
           const cacheData = await store.getItem<any>(cid)
-          console.log('cacheData', cacheData)
           if (cacheData) {
             const { data, checked } = cacheData
             if (!checked) {
               // Recheck data on IPFS
               try {
                 this.get(digest, false).then((rp) => {
-                  console.log('rp', rp)
                   if (!!rp) store.setItem(cid, { data: rp, checked: true })
                 })
               } catch (error) {
-                console.log('error check')
                 this.set(data)
               }
             }
