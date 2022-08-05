@@ -20,7 +20,6 @@ const MintTag = ({
   active = false,
   onRemove = () => {},
 }: MintTagProps) => {
-  console.log(active, ' ac tive')
   return (
     <Card
       bodyStyle={{
