@@ -5,7 +5,7 @@ import useNFTsByOwner from './useNFTsByOwner'
 
 const useNFTsByOwnerAndCollection = (
   ownerPublickey: string,
-  collectionAddress?: string,
+  collectionAddress?: string[],
 ) => {
   const { nfts } = useNFTsByOwner(ownerPublickey)
   const [nftsGroupByCollection, setNftsGroupByCollection] =
@@ -29,10 +29,12 @@ const useNFTsByOwnerAndCollection = (
         : [nft])
     })
     let listNftsSortByCollection: MetadataDataType[] = []
-    if (collectionAddress) {
-      Array.prototype.push.apply(
-        listNftsSortByCollection,
-        listNFTsGroupByCollection[collectionAddress],
+    if (collectionAddress?.length) {
+      collectionAddress.map((collection) =>
+        Array.prototype.push.apply(
+          listNftsSortByCollection,
+          listNFTsGroupByCollection[collection],
+        ),
       )
     } else {
       Object.keys(listNFTsGroupByCollection).map((collection) =>

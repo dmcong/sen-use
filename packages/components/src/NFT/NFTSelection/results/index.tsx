@@ -7,7 +7,8 @@ export type ResultsProps = {
   searchText: string
   hiddenUnknownNFTs?: boolean
   onSelect: (mintAddress: string) => void
-  collectionAddress?: string
+  collectionAddress?: string[]
+  selectedNFTs?: string[]
 }
 const Results = ({
   searchNFTby,
@@ -15,6 +16,7 @@ const Results = ({
   hiddenUnknownNFTs,
   onSelect,
   collectionAddress,
+  selectedNFTs,
 }: ResultsProps) => {
   return searchNFTby === searchNFTType.nfts ? (
     <ListNFTs
@@ -22,6 +24,7 @@ const Results = ({
       searchText={searchText}
       onSelect={onSelect}
       collectionAddress={collectionAddress}
+      selectedNFTs={selectedNFTs}
     />
   ) : (
     <ListCollections searchText={searchText} onSelect={onSelect} />
