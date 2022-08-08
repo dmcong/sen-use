@@ -5,7 +5,8 @@ import LazyLoad from '@sentre/react-lazyload'
 import { Col, Empty, Row } from 'antd'
 import CardNFT from '../../cardNFT'
 import SearchEngine from '../search/searchEngine'
-import useOwnerNftByCollection from '../../hooks/useOwnerNftByCollection'
+
+import useNFTsByOwnerAndCollection from '../../hooks/useNFTsByOwnerAndCollection'
 
 export type ListNFTsProps = {
   searchText: string
@@ -27,7 +28,7 @@ const ListNFTs = ({
   const {
     wallet: { address: walletAddress },
   } = useWallet()
-  const { nftsSortByCollection: nfts } = useOwnerNftByCollection(
+  const { nftsSortByCollection: nfts } = useNFTsByOwnerAndCollection(
     walletAddress,
     collectionAddress,
   )

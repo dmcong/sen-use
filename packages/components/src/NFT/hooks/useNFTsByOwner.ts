@@ -4,7 +4,7 @@ import { useAccount, DataLoader } from '@sentre/senhub'
 import metaplexNFT, { MetadataDataType } from '../metaplex'
 import { BN } from 'bn.js'
 
-const useOwnerNFT = (ownerPublickey: string) => {
+const useNFTsByOwner = (ownerPublickey: string) => {
   const [nfts, setNfts] = useState<MetadataDataType[]>()
   const [nftsFiltered, setNftFiltered] = useState<MetadataDataType[]>()
   const { accounts } = useAccount()
@@ -49,4 +49,4 @@ const useOwnerNFT = (ownerPublickey: string) => {
   return { nfts: nftsFiltered }
 }
 
-export default useOwnerNFT
+export default useNFTsByOwner
