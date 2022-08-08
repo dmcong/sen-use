@@ -2,13 +2,18 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { MetadataDataType } from '../metaplex'
 import useNftMetaData from './useNftMetaData'
-import useOwnerNFT from './useOwnerNFT'
+import useNFTsByOwner from './useNFTsByOwner'
 
-const useNFTCollection = (
-  ownerPublickey: string,
-  searchCollectionAddress: string,
-) => {
-  const { nfts } = useOwnerNFT(ownerPublickey)
+export type useNFTCollectionProps = {
+  ownerPublickey: string
+  searchCollectionAddress?: string
+}
+
+export const useNFTCollection = ({
+  ownerPublickey,
+  searchCollectionAddress = '',
+}: useNFTCollectionProps) => {
+  const { nfts } = useNFTsByOwner(ownerPublickey)
   const { metadata: nftMetaData } = useNftMetaData(searchCollectionAddress)
   const [nftsCollection, setNFTsCollection] =
     useState<Record<string, MetadataDataType[]>>()

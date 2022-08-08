@@ -12,7 +12,8 @@ import { searchNFTType, NFTSelectionProps } from '../../NFTSelection'
 const Search = ({
   onSelect = () => {},
   searchNFTby = searchNFTType.nfts,
-  collectionAddress = '',
+  collectionAddress = [],
+  selectedNFTs = [],
 }: NFTSelectionProps) => {
   const {
     ui: { width },
@@ -62,6 +63,7 @@ const Search = ({
           hiddenUnknownNFTs={hiddenUnknownNFTs}
           onSelect={onSelect}
           collectionAddress={collectionAddress}
+          selectedNFTs={selectedNFTs}
         />
       </Col>
     </Row>

@@ -10,18 +10,18 @@ export enum searchNFTType {
 
 export type NFTSelectionProps = {
   onSelect?: (mintAddress: string) => void
-  value?: string
+  selectedNFTs?: string[]
   searchNFTby?: searchNFTType
   title?: string
-  collectionAddress?: string
+  collectionAddress?: string[]
 }
 
 const NFTSelection = ({
-  value = '',
+  selectedNFTs = [],
   onSelect = () => {},
   searchNFTby = searchNFTType.nfts,
   title = 'NFT Selection',
-  collectionAddress = '',
+  collectionAddress = [],
 }: NFTSelectionProps) => {
   const [visible, setVisible] = useState(false)
 
@@ -45,7 +45,7 @@ const NFTSelection = ({
       >
         <SearchNFT
           onSelect={onSelectNFT}
-          value={value}
+          selectedNFTs={selectedNFTs}
           searchNFTby={searchNFTby}
           collectionAddress={collectionAddress}
         />

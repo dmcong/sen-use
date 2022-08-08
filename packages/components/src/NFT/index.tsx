@@ -1,3 +1,7 @@
 export { default as NFTSelection, searchNFTType } from './NFTSelection'
+export { default as SearchNFT } from './NFTSelection/search'
 export { default as AvatarNFT } from './avatarNFT'
 export { default as useNftMetaData } from './hooks/useNftMetaData'
+export { default as useNFTCollection } from './hooks/useNFTCollection'
+export { default as useNFTsByOwner } from './hooks/useNFTsByOwner'
+export { default as useNFTsByOwnerAndCollection } from './hooks/useNFTsByOwnerAndCollection'

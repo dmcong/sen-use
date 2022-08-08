@@ -33,7 +33,7 @@ const CardNFT = ({
 
   return (
     <Spin spinning={loading}>
-      <Row gutter={[16, 16]} style={{ cursor: 'pointer' }}>
+      <Row gutter={[12, 12]} style={{ cursor: 'pointer' }}>
         <Col
           span={24}
           style={{ textAlign: 'center', width: size }}
@@ -47,7 +47,7 @@ const CardNFT = ({
         </Col>
         {isShowName && (
           <Col span={24} style={{ textAlign: 'left' }}>
-            <Row gutter={[8, 8]}>
+            <Row>
               <Col span={24}>
                 <Typography.Title ellipsis={{ tooltip: true }} level={5}>
                   {nftInfo?.name || metadata?.data.data.name}

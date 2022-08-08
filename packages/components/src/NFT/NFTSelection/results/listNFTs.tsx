@@ -5,20 +5,23 @@ import LazyLoad from '@sentre/react-lazyload'
 import { Col, Empty, Row } from 'antd'
 import CardNFT from '../../cardNFT'
 import SearchEngine from '../search/searchEngine'
-import useOwnerNftByCollection from '../../hooks/useOwnerNftByCollection'
+
+import useNFTsByOwnerAndCollection from '../../hooks/useNFTsByOwnerAndCollection'
 
 export type ListNFTsProps = {
   searchText: string
   hiddenUnknownNFTs?: boolean
   onSelect: (mintAddress: string) => void
-  collectionAddress?: string
+  collectionAddress?: string[]
+  selectedNFTs?: string[]
 }
 
 const ListNFTs = ({
   searchText,
   hiddenUnknownNFTs,
   onSelect,
-  collectionAddress = '',
+  collectionAddress = [],
+  selectedNFTs,
 }: ListNFTsProps) => {
   const [listNFTsUnknown, setListNFTsUnknown] = useState<
     Record<string, boolean>
@@ -27,7 +30,7 @@ const ListNFTs = ({
   const {
     wallet: { address: walletAddress },
   } = useWallet()
-  const { nftsSortByCollection: nfts } = useOwnerNftByCollection(
+  const { nftsSortByCollection: nfts } = useNFTsByOwnerAndCollection(
     walletAddress,
     collectionAddress,
   )
@@ -48,13 +51,16 @@ const ListNFTs = ({
     if (!nfts) return []
     let nftsCheckCondition = nfts
     if (hiddenUnknownNFTs)
-      nftsCheckCondition = nfts.filter((nft) => !listNFTsUnknown[nft.mint])
+      nftsCheckCondition = nfts.filter(
+        (nft) =>
+          !listNFTsUnknown[nft.mint] && !selectedNFTs?.includes(nft.mint),
+      )
     if (!searchText.length) return nftsCheckCondition
 
     const engine = new SearchEngine(nftsCheckCondition)
     const filtered = engine.search(searchText)
     return filtered
-  }, [hiddenUnknownNFTs, listNFTsUnknown, nfts, searchText])
+  }, [hiddenUnknownNFTs, listNFTsUnknown, nfts, searchText, selectedNFTs])
 
   return (
     <Row gutter={[24, 24]} className="scrollbar" style={{ height: 300 }}>

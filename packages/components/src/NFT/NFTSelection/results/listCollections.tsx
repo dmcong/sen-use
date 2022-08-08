@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
 import { useWallet } from '@sentre/senhub'
-import { useHistory } from 'react-router-dom'
 import LazyLoad from '@sentre/react-lazyload'
 
 import { Col, Empty, Row } from 'antd'
@@ -16,7 +14,10 @@ const ListCollections = ({ searchText, onSelect }: ListCollectionsProps) => {
   const {
     wallet: { address: walletAddress },
   } = useWallet()
-  const { collections } = useNFTCollection(walletAddress, searchText)
+  const { collections } = useNFTCollection({
+    ownerPublickey: walletAddress,
+    searchCollectionAddress: searchText,
+  })
 
   const onSelectNFT = (mintAddress: string) => {
     onSelect(mintAddress)
