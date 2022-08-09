@@ -29,5 +29,5 @@ export const useSortMints = (mints: string[]) => {
     sortMints(mints)
   }, [mints, sortMints])
 
-  return { sortedMints, sortMints }
+  return sortedMints
 }

@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { memo, ReactNode, useCallback, useEffect, useState } from 'react'
 import { account } from '@senswap/sen-js'
 
 import { Avatar } from 'antd'
@@ -24,62 +24,64 @@ export type MintAvatarProps = {
  * @param reversed - (Optional) The default LP token avatar is A-B. The reversed is to change it to B-A
  * @returns name
  */
-const MintAvatar = ({
-  key,
-  mintAddress,
-  size = 24,
-  icon = <IonIcon name="diamond-outline" />,
-  reversed = false,
-  ...props
-}: MintAvatarProps) => {
-  const [avatars, setAvatars] = useState(DEFAULT_AVATARS)
+const MintAvatar = memo(
+  ({
+    key,
+    mintAddress,
+    size = 24,
+    icon = <IonIcon name="diamond-outline" />,
+    reversed = false,
+    ...props
+  }: MintAvatarProps) => {
+    const [avatars, setAvatars] = useState(DEFAULT_AVATARS)
 
-  const deriveAvatar = useCallback(async (address: string) => {
-    const tokens = await tokenProviderGlobal.findAtomicTokens(address)
-    return tokens.map((token) => token?.logoURI)
-  }, [])
+    const deriveAvatar = useCallback(async (address: string) => {
+      const tokens = await tokenProviderGlobal.findAtomicTokens(address)
+      return tokens.map((token) => token?.logoURI)
+    }, [])
 
-  const deriveAvatars = useCallback(async () => {
-    if (!account.isAddress(mintAddress)) return setAvatars(DEFAULT_AVATARS)
-    const avatar = await deriveAvatar(mintAddress)
-    return setAvatars(avatar)
-  }, [mintAddress, deriveAvatar])
+    const deriveAvatars = useCallback(async () => {
+      if (!account.isAddress(mintAddress)) return setAvatars(DEFAULT_AVATARS)
+      const avatar = await deriveAvatar(mintAddress)
+      return setAvatars(avatar)
+    }, [mintAddress, deriveAvatar])
 
-  useEffect(() => {
-    deriveAvatars()
-  }, [deriveAvatars])
+    useEffect(() => {
+      deriveAvatars()
+    }, [deriveAvatars])
 
-  if (avatars.length === 1)
-    return (
-      <Avatar
-        src={avatars[0]}
-        size={size}
-        style={{ backgroundColor: '#2D3355', border: 'none' }}
-        {...props}
-      >
-        {icon}
-      </Avatar>
-    )
-  return (
-    <Avatar.Group
-      maxCount={2}
-      style={{ display: 'block', whiteSpace: 'nowrap' }}
-      maxStyle={{ backgroundColor: '#2D3355' }}
-      {...props}
-      size={size}
-    >
-      {avatars.map((avatar, i) => (
+    if (avatars.length === 1)
+      return (
         <Avatar
-          key={i}
-          src={avatar}
+          src={avatars[0]}
           size={size}
           style={{ backgroundColor: '#2D3355', border: 'none' }}
+          {...props}
         >
           {icon}
         </Avatar>
-      ))}
-    </Avatar.Group>
-  )
-}
+      )
+    return (
+      <Avatar.Group
+        maxCount={2}
+        style={{ display: 'block', whiteSpace: 'nowrap' }}
+        maxStyle={{ backgroundColor: '#2D3355' }}
+        {...props}
+        size={size}
+      >
+        {avatars.map((avatar, i) => (
+          <Avatar
+            key={i}
+            src={avatar}
+            size={size}
+            style={{ backgroundColor: '#2D3355', border: 'none' }}
+          >
+            {icon}
+          </Avatar>
+        ))}
+      </Avatar.Group>
+    )
+  },
+)
 
 export default MintAvatar

@@ -12,7 +12,7 @@ export const useSearchedMints = (keyword: string = '') => {
   const [searchedMints, setSearchedMints] = useState<string[]>([])
   const jptTokens = useJupiterTokens()
   const myMints = useMyMints()
-  const { sortedMints } = useSortMints(myMints)
+  const sortedMints = useSortMints(myMints)
 
   const buildDefaultTokens = useCallback(async () => {
     let filteredMints = new Set<string>()

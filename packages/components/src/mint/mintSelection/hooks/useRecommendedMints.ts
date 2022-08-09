@@ -12,7 +12,7 @@ const LOCAL_STORAGE_ID = `${net}:selected_mints`
 export const useRecommendedMints = () => {
   const [recommendedMints, setRecommendedMints] = useState<string[]>([])
   const myMints = useMyMints()
-  const { sortedMints } = useSortMints(myMints)
+  const sortedMints = useSortMints(myMints)
 
   const getLimitMints = (mints: string[]) => {
     return mints.splice(0, VIEW_PER_PAGE)
