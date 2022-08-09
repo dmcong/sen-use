@@ -1,9 +1,10 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { account } from '@senswap/sen-js'
-import { tokenProvider } from '@sentre/senhub'
 
 import { Avatar } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
+
+import { tokenProviderGlobal } from './tokenProviderGlobal'
 
 const DEFAULT_AVATARS: Array<string | undefined> = [undefined]
 
@@ -34,16 +35,14 @@ const MintAvatar = ({
   const [avatars, setAvatars] = useState(DEFAULT_AVATARS)
 
   const deriveAvatar = useCallback(async (address: string) => {
-    const token = await tokenProvider.findByAddress(address)
-    if (token?.logoURI) return token.logoURI
-    return undefined
+    const tokens = await tokenProviderGlobal.findAtomicTokens(address)
+    return tokens.map((token) => token?.logoURI)
   }, [])
 
   const deriveAvatars = useCallback(async () => {
     if (!account.isAddress(mintAddress)) return setAvatars(DEFAULT_AVATARS)
-
     const avatar = await deriveAvatar(mintAddress)
-    return setAvatars([avatar])
+    return setAvatars(avatar)
   }, [mintAddress, deriveAvatar])
 
   useEffect(() => {
@@ -62,7 +61,13 @@ const MintAvatar = ({
       </Avatar>
     )
   return (
-    <Avatar.Group style={{ display: 'block', whiteSpace: 'nowrap' }} {...props}>
+    <Avatar.Group
+      maxCount={2}
+      style={{ display: 'block', whiteSpace: 'nowrap' }}
+      maxStyle={{ backgroundColor: '#2D3355' }}
+      {...props}
+      size={size}
+    >
       {avatars.map((avatar, i) => (
         <Avatar
           key={i}
