@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { account } from '@senswap/sen-js'
-import { tokenProvider } from '@sentre/senhub'
+import { useUI } from '@sentre/senhub'
+
+import { Tooltip } from 'antd'
+
+import { tokenProviderGlobal } from './tokenProviderGlobal'
 
 const DEFAULT_NAME = 'Unknown Token'
 
@@ -21,26 +25,48 @@ const MintName = ({
   reversed?: boolean
 }) => {
   const [name, setName] = useState(DEFAULT_NAME)
+  const [shortenName, setShortenName] = useState(DEFAULT_NAME)
+  const {
+    ui: { width },
+  } = useUI()
 
+  const isMobile = width < 575
   const deriveName = useCallback(async (address: string) => {
-    const token = await tokenProvider.findByAddress(address)
-    if (token?.name) return token.name
-    return DEFAULT_NAME
+    const tokens = await tokenProviderGlobal.findAtomicTokens(address)
+    const names = tokens.map((token) => {
+      if (!token?.name) return DEFAULT_NAME
+      return token.name
+    })
+    return names
   }, [])
 
   const deriveNames = useCallback(async () => {
     if (!account.isAddress(mintAddress)) return setName(DEFAULT_NAME)
 
     // Normal mint
-    const name = await deriveName(mintAddress)
-    return setName(name)
-  }, [mintAddress, deriveName])
+    const listName = await deriveName(mintAddress)
+    const maxNameDisplay = 2
+    const shortenName = listName.slice(0, maxNameDisplay)
+
+    setShortenName(shortenName.join(separator))
+    return setName(listName.join(separator))
+  }, [mintAddress, deriveName, separator])
 
   useEffect(() => {
     deriveNames()
   }, [deriveNames])
 
-  return <span>{name}</span>
+  return (
+    <Tooltip
+      title={name}
+      visible={shortenName === name || isMobile ? false : undefined}
+    >
+      <span>
+        {shortenName}
+        {shortenName !== name ? '...' : ' '}
+      </span>
+    </Tooltip>
+  )
 }
 
 export default MintName
