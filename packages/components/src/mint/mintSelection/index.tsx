@@ -12,17 +12,27 @@ export type MintSelectionProps = {
   disabled?: boolean
   nativeSol?: boolean
   placeholder?: string
+  mints?: string[]
 }
 
 const MintSelection = ({
-  value = '',
+  value,
   onChange = () => {},
   style = {},
   disabled = false,
   nativeSol = false,
   placeholder,
+  mints,
 }: MintSelectionProps) => {
   const [visible, setVisible] = useState(false)
+  const [selected, setSelected] = useState('')
+
+  const selectedVal = value || selected
+
+  const onSelect = (selected: string) => {
+    onChange(selected)
+    setSelected(selected)
+  }
 
   return (
     <Fragment>
@@ -33,11 +43,11 @@ const MintSelection = ({
         disabled={disabled}
       >
         <Space>
-          <MintAvatar mintAddress={value} />
-          {placeholder && !value ? (
+          <MintAvatar mintAddress={selectedVal} />
+          {placeholder && !selectedVal ? (
             placeholder
           ) : (
-            <MintSymbol mintAddress={value} />
+            <MintSymbol mintAddress={selectedVal} />
           )}
           <IonIcon name="chevron-down-outline" />
         </Space>
@@ -49,13 +59,13 @@ const MintSelection = ({
         closable={false}
         centered
         className="mint-select-modal"
-        destroyOnClose
       >
         <SearchMints
-          onChange={onChange}
+          onChange={onSelect}
           onClose={() => setVisible(false)}
           nativeSol={nativeSol}
           value={value}
+          mints={mints}
         />
       </Modal>
     </Fragment>

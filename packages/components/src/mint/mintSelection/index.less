@@ -3,3 +3,44 @@
     border-radius: 16px !important;
   }
 }
+
+// Button remove recommend mint tag
+.mint-tag {
+  &:hover {
+    .btn-remove-recommend-tag {
+      display: flex !important;
+    }
+  }
+}
+.btn-remove-recommend-tag {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  border: 2px solid;
+  top: -2px;
+  right: -2px;
+  border-color: #eeeeef;
+  background: transparent !important;
+  &:hover {
+    border-color: #eeeeef !important;
+  }
+  span {
+    font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    display: flex;
+  }
+}
+
+#dark {
+  .btn-remove-recommend-tag {
+    border-color: #202230;
+    &:hover {
+      border-color: #202230 !important;
+    }
+  }
+}

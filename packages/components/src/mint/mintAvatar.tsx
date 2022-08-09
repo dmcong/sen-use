@@ -1,9 +1,10 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { account } from '@senswap/sen-js'
-import { useMint, usePool } from '@sentre/senhub'
 
 import { Avatar } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
+
+import { tokenProviderGlobal } from './tokenProviderGlobal'
 
 const DEFAULT_AVATARS: Array<string | undefined> = [undefined]
 
@@ -32,34 +33,17 @@ const MintAvatar = ({
   ...props
 }: MintAvatarProps) => {
   const [avatars, setAvatars] = useState(DEFAULT_AVATARS)
-  const { tokenProvider } = useMint()
-  const { pools } = usePool()
 
-  const deriveAvatar = useCallback(
-    async (address: string) => {
-      const token = await tokenProvider.findByAddress(address)
-      if (token?.logoURI) return token.logoURI
-      return undefined
-    },
-    [tokenProvider],
-  )
+  const deriveAvatar = useCallback(async (address: string) => {
+    const tokens = await tokenProviderGlobal.findAtomicTokens(address)
+    return tokens.map((token) => token?.logoURI)
+  }, [])
 
   const deriveAvatars = useCallback(async () => {
     if (!account.isAddress(mintAddress)) return setAvatars(DEFAULT_AVATARS)
-    // LP mint
-    const poolData = Object.values(pools || {}).find(
-      ({ mint_lpt }) => mint_lpt === mintAddress,
-    )
-    if (poolData) {
-      const { mint_a, mint_b } = poolData
-      const avatars = await Promise.all([mint_a, mint_b].map(deriveAvatar))
-      if (reversed) avatars.reverse()
-      return setAvatars(avatars)
-    }
-    // Normal mint
     const avatar = await deriveAvatar(mintAddress)
-    return setAvatars([avatar])
-  }, [mintAddress, reversed, deriveAvatar, pools])
+    return setAvatars(avatar)
+  }, [mintAddress, deriveAvatar])
 
   useEffect(() => {
     deriveAvatars()
@@ -77,7 +61,13 @@ const MintAvatar = ({
       </Avatar>
     )
   return (
-    <Avatar.Group style={{ display: 'block', whiteSpace: 'nowrap' }} {...props}>
+    <Avatar.Group
+      maxCount={2}
+      style={{ display: 'block', whiteSpace: 'nowrap' }}
+      maxStyle={{ backgroundColor: '#2D3355' }}
+      {...props}
+      size={size}
+    >
       {avatars.map((avatar, i) => (
         <Avatar
           key={i}

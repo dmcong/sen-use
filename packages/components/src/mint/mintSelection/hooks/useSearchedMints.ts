@@ -1,16 +1,15 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useMint } from '@sentre/senhub'
 
 import { useMyMints } from './useMyMints'
 import { useSortMints } from './useSortMints'
 import { useJupiterTokens } from './useJupiterTokens'
+import { tokenProviderGlobal } from 'mint/tokenProviderGlobal'
 
 let searching: NodeJS.Timeout
 
 export const useSearchedMints = (keyword: string = '') => {
   const [loading, setLoading] = useState(false)
   const [searchedMints, setSearchedMints] = useState<string[]>([])
-  const { tokenProvider } = useMint()
   const jptTokens = useJupiterTokens()
   const myMints = useMyMints()
   const { sortedMints } = useSortMints(myMints)
@@ -18,13 +17,13 @@ export const useSearchedMints = (keyword: string = '') => {
   const buildDefaultTokens = useCallback(async () => {
     let filteredMints = new Set<string>()
     for (const mint of sortedMints) {
-      const valid = await tokenProvider.findByAddress(mint)
+      const valid = await tokenProviderGlobal.findByAddress(mint)
       if (valid) filteredMints.add(mint)
     }
-    const allMints = await tokenProvider.all()
+    const allMints = await tokenProviderGlobal.all()
     for (const mint of allMints) filteredMints.add(mint.address)
     return Array.from(filteredMints)
-  }, [sortedMints, tokenProvider])
+  }, [sortedMints])
 
   const search = useCallback(async () => {
     setLoading(true)
@@ -36,7 +35,7 @@ export const useSearchedMints = (keyword: string = '') => {
           const defaultMints = await buildDefaultTokens()
           return setSearchedMints(defaultMints)
         }
-        const tokens = await tokenProvider.find(keyword, 0)
+        const tokens = await tokenProviderGlobal.find(keyword, 0)
         const verifiedTokens: string[] = []
         const unverifiedTokens: string[] = []
         for (const mint of tokens) {
@@ -54,7 +53,7 @@ export const useSearchedMints = (keyword: string = '') => {
         setLoading(false)
       }
     }, time)
-  }, [buildDefaultTokens, jptTokens, keyword, myMints, tokenProvider])
+  }, [buildDefaultTokens, jptTokens, keyword, myMints])
 
   useEffect(() => {
     search()
