@@ -1,4 +1,5 @@
 import { memo, ReactNode, useCallback, useEffect, useState } from 'react'
+import { Address } from '@project-serum/anchor'
 import { account } from '@senswap/sen-js'
 
 import { Avatar } from 'antd'
@@ -10,7 +11,7 @@ const DEFAULT_AVATARS: Array<string | undefined> = [undefined]
 
 export type MintAvatarProps = {
   key?: string
-  mintAddress: string
+  mintAddress: Address
   size?: number
   icon?: ReactNode
   reversed?: boolean
@@ -35,13 +36,14 @@ const MintAvatar = memo(
   }: MintAvatarProps) => {
     const [avatars, setAvatars] = useState(DEFAULT_AVATARS)
 
-    const deriveAvatar = useCallback(async (address: string) => {
+    const deriveAvatar = useCallback(async (address: Address) => {
       const tokens = await tokenProviderGlobal.findAtomicTokens(address)
       return tokens.map((token) => token?.logoURI)
     }, [])
 
     const deriveAvatars = useCallback(async () => {
-      if (!account.isAddress(mintAddress)) return setAvatars(DEFAULT_AVATARS)
+      if (!account.isAddress(mintAddress.toString()))
+        return setAvatars(DEFAULT_AVATARS)
       const avatar = await deriveAvatar(mintAddress)
       return setAvatars(avatar)
     }, [mintAddress, deriveAvatar])

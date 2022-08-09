@@ -1,4 +1,5 @@
 import { memo, useCallback, useEffect, useState } from 'react'
+import { Address } from '@project-serum/anchor'
 import { account } from '@senswap/sen-js'
 import { useUI } from '@sentre/senhub'
 
@@ -21,7 +22,7 @@ const MintName = memo(
     separator = ' • ',
     reversed = false,
   }: {
-    mintAddress: string
+    mintAddress: Address
     separator?: string
     reversed?: boolean
   }) => {
@@ -32,26 +33,21 @@ const MintName = memo(
     } = useUI()
 
     const isMobile = width < 575
-    const deriveName = useCallback(async (address: string) => {
-      const tokens = await tokenProviderGlobal.findAtomicTokens(address)
-      const names = tokens.map((token) => {
-        if (!token?.name) return DEFAULT_NAME
-        return token.name
-      })
-      return names
-    }, [])
 
     const deriveNames = useCallback(async () => {
-      if (!account.isAddress(mintAddress)) return setName(DEFAULT_NAME)
+      if (!account.isAddress(mintAddress.toString()))
+        return setName(DEFAULT_NAME)
+
+      const tokens = await tokenProviderGlobal.findAtomicTokens(mintAddress)
+      const names = tokens.map((token) => token?.name || DEFAULT_NAME)
 
       // Normal mint
-      const listName = await deriveName(mintAddress)
       const maxNameDisplay = 2
-      const shortenName = listName.slice(0, maxNameDisplay)
+      const shortenName = names.slice(0, maxNameDisplay)
 
       setShortenName(shortenName.join(separator))
-      return setName(listName.join(separator))
-    }, [mintAddress, deriveName, separator])
+      return setName(names.join(separator))
+    }, [mintAddress, separator])
 
     useEffect(() => {
       deriveNames()

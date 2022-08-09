@@ -1,4 +1,5 @@
 import { memo, useCallback, useEffect, useState } from 'react'
+import { Address } from '@project-serum/anchor'
 import { account } from '@senswap/sen-js'
 import { useUI } from '@sentre/senhub'
 
@@ -21,7 +22,7 @@ const MintSymbol = memo(
     separator = ' • ',
     reversed = false,
   }: {
-    mintAddress: string
+    mintAddress: Address
     separator?: string
     reversed?: boolean
   }) => {
@@ -33,26 +34,22 @@ const MintSymbol = memo(
 
     const isMobile = width < 575
 
-    const deriveSymbol = useCallback(async (address: string) => {
-      const tokens = await tokenProviderGlobal.findAtomicTokens(address)
+    const deriveSymbols = useCallback(async () => {
+      if (!account.isAddress(mintAddress.toString()))
+        return setSymbol(DEFAULT_SYMBOL)
+
+      const tokens = await tokenProviderGlobal.findAtomicTokens(mintAddress)
       const symbols = tokens.map((token) => {
-        if (!token?.symbol) return address.substring(0, 4)
+        if (!token?.symbol) return mintAddress.toString().substring(0, 4)
         return token.symbol
       })
-      return symbols
-    }, [])
 
-    const deriveSymbols = useCallback(async () => {
-      if (!account.isAddress(mintAddress)) return setSymbol(DEFAULT_SYMBOL)
-
-      // Normal mint
-      const symbols = await deriveSymbol(mintAddress)
       const maxSymbolDisplay = 2
       const shortenSymbol = symbols.slice(0, maxSymbolDisplay)
 
       setShortenSymbol(shortenSymbol.join(separator))
       return setSymbol(symbols.join(separator))
-    }, [mintAddress, deriveSymbol, separator])
+    }, [mintAddress, separator])
 
     useEffect(() => {
       deriveSymbols()
