@@ -1,5 +1,6 @@
 import { util, useWalletBalance } from '@sentre/senhub'
-import { utilBN } from '@sen-use/web3'
+import { BN } from '@project-serum/anchor'
+import { utilsBN } from '@sen-use/web3'
 
 import { Card, Col, Row, Space, Typography } from 'antd'
 import { MintAvatar, MintName, MintSymbol } from '../index'
@@ -17,7 +18,10 @@ export type SolCardProps = {
 const SolCard = ({ onClick = () => {} }: SolCardProps) => {
   const jptTokens = useJupiterTokens()
   const lamports = useWalletBalance()
-  const solBalance = utilBN.undecimalize(lamports, SOL_DECIMALS)
+  const solBalance = utilsBN.undecimalize(
+    new BN(lamports.toString()),
+    SOL_DECIMALS,
+  )
 
   const formatNumric = (value: string | number, format?: string) =>
     util.numeric(value).format(format || DEFAULT_FORMAT_NUMRIC)
