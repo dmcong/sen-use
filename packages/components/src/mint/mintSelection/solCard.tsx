@@ -1,6 +1,5 @@
-import { utils } from '@senswap/sen-js'
-import { useWallet } from '@sentre/senhub'
-import { util } from '@sentre/senhub'
+import { util, useWalletBalance } from '@sentre/senhub'
+import { utilBN } from '@sen-use/web3'
 
 import { Card, Col, Row, Space, Typography } from 'antd'
 import { MintAvatar, MintName, MintSymbol } from '../index'
@@ -17,11 +16,8 @@ export type SolCardProps = {
 }
 const SolCard = ({ onClick = () => {} }: SolCardProps) => {
   const jptTokens = useJupiterTokens()
-  const {
-    wallet: { lamports },
-  } = useWallet()
-
-  const solBalance = utils.undecimalize(lamports, SOL_DECIMALS)
+  const lamports = useWalletBalance()
+  const solBalance = utilBN.undecimalize(lamports, SOL_DECIMALS)
 
   const formatNumric = (value: string | number, format?: string) =>
     util.numeric(value).format(format || DEFAULT_FORMAT_NUMRIC)

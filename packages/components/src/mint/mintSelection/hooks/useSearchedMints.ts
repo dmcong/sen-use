@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
+import { tokenProvider } from '@sentre/senhub'
 
 import { useMyMints } from './useMyMints'
 import { useSortMints } from './useSortMints'
 import { useJupiterTokens } from './useJupiterTokens'
-import { tokenProviderGlobal } from 'mint/tokenProviderGlobal'
 
 let searching: NodeJS.Timeout
 
@@ -17,10 +17,10 @@ export const useSearchedMints = (keyword: string = '') => {
   const buildDefaultTokens = useCallback(async () => {
     let filteredMints = new Set<string>()
     for (const mint of sortedMints) {
-      const valid = await tokenProviderGlobal.findByAddress(mint)
+      const valid = await tokenProvider.findByAddress(mint)
       if (valid) filteredMints.add(mint)
     }
-    const allMints = await tokenProviderGlobal.all()
+    const allMints = await tokenProvider.all()
     for (const mint of allMints) filteredMints.add(mint.address)
     return Array.from(filteredMints)
   }, [sortedMints])
@@ -35,7 +35,7 @@ export const useSearchedMints = (keyword: string = '') => {
           const defaultMints = await buildDefaultTokens()
           return setSearchedMints(defaultMints)
         }
-        const tokens = await tokenProviderGlobal.find(keyword, 0)
+        const tokens = await tokenProvider.find(keyword, 0)
         const verifiedTokens: string[] = []
         const unverifiedTokens: string[] = []
         for (const mint of tokens) {

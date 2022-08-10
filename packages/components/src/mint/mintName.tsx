@@ -1,11 +1,8 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Address } from '@project-serum/anchor'
-import { account } from '@senswap/sen-js'
-import { useUI } from '@sentre/senhub'
+import { tokenProvider, useUI, util } from '@sentre/senhub'
 
 import { Tooltip } from 'antd'
-
-import { tokenProviderGlobal } from './tokenProviderGlobal'
 
 const DEFAULT_NAME = 'Unknown Token'
 
@@ -35,10 +32,9 @@ const MintName = memo(
     const isMobile = width < 575
 
     const deriveNames = useCallback(async () => {
-      if (!account.isAddress(mintAddress.toString()))
-        return setName(DEFAULT_NAME)
+      if (!util.isAddress(mintAddress.toString())) return setName(DEFAULT_NAME)
 
-      const tokens = await tokenProviderGlobal.findAtomicTokens(mintAddress)
+      const tokens = await tokenProvider.findAtomicTokens(mintAddress)
       const names = tokens.map((token) => token?.name || DEFAULT_NAME)
 
       // Normal mint

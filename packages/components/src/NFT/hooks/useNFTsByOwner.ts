@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useAccount, DataLoader } from '@sentre/senhub'
+import { useAccounts, DataLoader } from '@sentre/senhub'
 
 import metaplexNFT, { MetadataDataType } from '../metaplex'
 import { BN } from 'bn.js'
@@ -7,7 +7,7 @@ import { BN } from 'bn.js'
 const useNFTsByOwner = (ownerPublickey: string) => {
   const [nfts, setNfts] = useState<MetadataDataType[]>()
   const [nftsFiltered, setNftFiltered] = useState<MetadataDataType[]>()
-  const { accounts } = useAccount()
+  const accounts = useAccounts()
 
   const fetchNFTs = useCallback(async () => {
     if (!ownerPublickey) return setNfts(undefined)

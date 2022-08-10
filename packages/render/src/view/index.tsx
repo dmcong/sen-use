@@ -44,7 +44,7 @@ const View = () => {
       <Col>
         <Button onClick={increase}>Increase</Button>
       </Col>
-      <MintSelection />
+      <MintSelection nativeSol />
       <NFTSelection />
       <NFTSelection
         searchNFTby={searchNFTType.collections}

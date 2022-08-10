@@ -1,11 +1,9 @@
 import { memo, ReactNode, useCallback, useEffect, useState } from 'react'
 import { Address } from '@project-serum/anchor'
-import { account } from '@senswap/sen-js'
+import { tokenProvider, util } from '@sentre/senhub'
 
 import { Avatar } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
-
-import { tokenProviderGlobal } from './tokenProviderGlobal'
 
 const DEFAULT_AVATARS: Array<string | undefined> = [undefined]
 
@@ -37,12 +35,12 @@ const MintAvatar = memo(
     const [avatars, setAvatars] = useState(DEFAULT_AVATARS)
 
     const deriveAvatar = useCallback(async (address: Address) => {
-      const tokens = await tokenProviderGlobal.findAtomicTokens(address)
+      const tokens = await tokenProvider.findAtomicTokens(address)
       return tokens.map((token) => token?.logoURI)
     }, [])
 
     const deriveAvatars = useCallback(async () => {
-      if (!account.isAddress(mintAddress.toString()))
+      if (!util.isAddress(mintAddress.toString()))
         return setAvatars(DEFAULT_AVATARS)
       const avatar = await deriveAvatar(mintAddress)
       return setAvatars(avatar)
