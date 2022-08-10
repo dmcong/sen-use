@@ -1,4 +1,4 @@
-import { useWallet } from '@sentre/senhub'
+import { useWallet, useWalletAddress } from '@sentre/senhub'
 import LazyLoad from '@sentre/react-lazyload'
 
 import { Col, Empty, Row } from 'antd'
@@ -11,9 +11,7 @@ type ListCollectionsProps = {
   onSelect: (mintAddress: string) => void
 }
 const ListCollections = ({ searchText, onSelect }: ListCollectionsProps) => {
-  const {
-    wallet: { address: walletAddress },
-  } = useWallet()
+  const walletAddress = useWalletAddress()
   const { collections } = useNFTCollection({
     ownerPublickey: walletAddress,
     searchCollectionAddress: searchText,

@@ -4,8 +4,8 @@ import { BN } from '@project-serum/anchor'
 import {
   useAccounts,
   useMintDecimals,
-  useWallet,
   useWalletAddress,
+  useWalletBalance,
   util,
 } from '@sentre/senhub'
 import { utilsBN } from '@sen-use/web3'
@@ -45,9 +45,7 @@ const buildResult = (mintAddress?: string, amount?: BN, decimals?: number) => {
  * - AccountBalanceReturn.mintAddress: The corresponding mint
  */
 export const useAccountBalance = (accountAddress: string) => {
-  const {
-    wallet: { lamports },
-  } = useWallet()
+  const lamports = useWalletBalance()
   const walletAddress = useWalletAddress()
   const accounts = useAccounts()
   const { amount, mint: mintAddress } = accounts[accountAddress] || {}
@@ -68,9 +66,7 @@ export const useAccountBalance = (accountAddress: string) => {
  */
 export const useAccountBalanceByMintAddress = (mintAddress: string) => {
   const [accountAddress, setAccountAddress] = useState('')
-  const {
-    wallet: { address: walletAddress },
-  } = useWallet()
+  const walletAddress = useWalletAddress()
   const data = useAccountBalance(accountAddress)
 
   useEffect(() => {
