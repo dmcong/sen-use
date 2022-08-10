@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useWallet } from '@sentre/senhub'
+import { useWalletAddress } from '@sentre/senhub'
 import LazyLoad from '@sentre/react-lazyload'
 
 import { Col, Empty, Row } from 'antd'
@@ -26,10 +26,7 @@ const ListNFTs = ({
   const [listNFTsUnknown, setListNFTsUnknown] = useState<
     Record<string, boolean>
   >({})
-
-  const {
-    wallet: { address: walletAddress },
-  } = useWallet()
+  const walletAddress = useWalletAddress()
   const { nftsSortByCollection: nfts } = useNFTsByOwnerAndCollection(
     walletAddress,
     collectionAddress,
