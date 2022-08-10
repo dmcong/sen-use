@@ -5,7 +5,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
     "@sen-use/components": "^2.0.5",
-    "@senswap/sen-js": "^1.4.0",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
     "@sentre/senhub": "^3.2.2",

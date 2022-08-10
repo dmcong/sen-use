@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
-import { account } from '@senswap/sen-js'
+import { DataLoader, util } from '@sentre/senhub'
 
 import metaplexNFT, { MetadataType } from '../metaplex'
-import { DataLoader } from '@sentre/senhub'
 
 export type Attribute = {
   trait_type: string
@@ -24,7 +23,7 @@ const useNftMetaData = (mintAddress: string) => {
   const [isUnknownNFT, setIsUnknownNFT] = useState(false)
 
   const getMetaData = useCallback(async () => {
-    if (!account.isAddress(mintAddress)) {
+    if (!util.isAddress(mintAddress)) {
       setMetaData(undefined)
       return setNftInfo(undefined)
     }

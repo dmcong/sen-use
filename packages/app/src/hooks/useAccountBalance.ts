@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { account, DEFAULT_EMPTY_ADDRESS } from '@senswap/sen-js'
+import { DEFAULT_EMPTY_ADDRESS } from '@senswap/sen-js'
 import { BN } from '@project-serum/anchor'
 import {
-  useAccount,
+  useAccounts,
   useMintDecimals,
   useWallet,
   useWalletAddress,
+  util,
 } from '@sentre/senhub'
 import { utilsBN } from '@sen-use/web3'
 
@@ -18,7 +19,7 @@ export type AccountBalanceReturn = {
 
 const buildResult = (mintAddress?: string, amount?: BN, decimals?: number) => {
   if (
-    !account.isAddress(mintAddress) ||
+    !util.isAddress(mintAddress) ||
     amount === undefined ||
     decimals === undefined
   )
@@ -48,11 +49,11 @@ export const useAccountBalance = (accountAddress: string) => {
     wallet: { lamports },
   } = useWallet()
   const walletAddress = useWalletAddress()
-  const { accounts } = useAccount()
+  const accounts = useAccounts()
   const { amount, mint: mintAddress } = accounts[accountAddress] || {}
   const decimals = useMintDecimals({ mintAddress }) || 0
 
-  if (!account.isAddress(walletAddress) || !account.isAddress(accountAddress))
+  if (!util.isAddress(walletAddress) || !util.isAddress(accountAddress))
     return buildResult()
   if (accountAddress === walletAddress)
     return buildResult(DEFAULT_EMPTY_ADDRESS, new BN(lamports.toString()), 9)
@@ -74,7 +75,7 @@ export const useAccountBalanceByMintAddress = (mintAddress: string) => {
 
   useEffect(() => {
     ;(async () => {
-      if (!account.isAddress(walletAddress) || !account.isAddress(mintAddress))
+      if (!util.isAddress(walletAddress) || !util.isAddress(mintAddress))
         return setAccountAddress('')
       const {
         sentre: { splt },

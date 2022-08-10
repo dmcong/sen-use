@@ -37,17 +37,17 @@
   },
   "peerDependencies": {
     "react": "^17.0.39",
-    "react-dom": "^17.0.11"
+    "react-dom": "^17.0.11",
+    "@sen-use/web3": "^2.0.5"
   },
   "devDependencies": {
+    "@sentre/senhub": "^3.2.3",
     "@craco/craco": "^7.0.0-alpha.5",
     "@project-serum/anchor": "^0.24.2",
     "@reduxjs/toolkit": "^1.8.0",
-    "@senswap/sen-js": "^1.4.0",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/craco-plugins": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
-    "@sentre/senhub": "^3.2.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.2.1",

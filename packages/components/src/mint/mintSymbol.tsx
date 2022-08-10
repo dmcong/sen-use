@@ -1,11 +1,8 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Address } from '@project-serum/anchor'
-import { account } from '@senswap/sen-js'
-import { useUI } from '@sentre/senhub'
+import { tokenProvider, useUI, util } from '@sentre/senhub'
 
 import { Tooltip } from 'antd'
-
-import { tokenProviderGlobal } from './tokenProviderGlobal'
 
 const DEFAULT_SYMBOL = 'TOKN'
 
@@ -35,10 +32,10 @@ const MintSymbol = memo(
     const isMobile = width < 575
 
     const deriveSymbols = useCallback(async () => {
-      if (!account.isAddress(mintAddress.toString()))
+      if (!util.isAddress(mintAddress.toString()))
         return setSymbol(DEFAULT_SYMBOL)
 
-      const tokens = await tokenProviderGlobal.findAtomicTokens(mintAddress)
+      const tokens = await tokenProvider.findAtomicTokens(mintAddress)
       const symbols = tokens.map((token) => {
         if (!token?.symbol) return mintAddress.toString().substring(0, 4)
         return token.symbol
