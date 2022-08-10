@@ -1,4 +1,4 @@
-import { useWallet, useWalletAddress } from '@sentre/senhub'
+import { useWalletAddress } from '@sentre/senhub'
 import LazyLoad from '@sentre/react-lazyload'
 
 import { Col, Empty, Row } from 'antd'

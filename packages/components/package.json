@@ -11,12 +11,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "scripts": {
-    "prebuild": "yarn clean",
-    "build": "tsc",
-    "postbuild": "copyfiles -s -e \"**/*.ts\" -e \"**/*.tsx\" -u 1 \"src/**/*\" \"dist/\" && tsc-alias",
-    "clean": "rm -rf ./dist"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -37,22 +31,22 @@
   },
   "peerDependencies": {
     "react": "^17.0.39",
-    "react-dom": "^17.0.11"
+    "react-dom": "^17.0.11",
+    "@sentre/senhub": "^3.2.3"
   },
   "dependencies": {
     "@metaplex/js": "^4.12.0",
     "lunr": "^2.3.9",
-    "react-use": "^17.4.0"
+    "react-use": "^17.4.0",
+    "@sen-use/web3": "^2.0.8"
   },
   "devDependencies": {
-    "@sen-use/web3": "^2.0.5",
     "@craco/craco": "^7.0.0-alpha.5",
     "@project-serum/anchor": "^0.24.2",
     "@reduxjs/toolkit": "^1.8.0",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/craco-plugins": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
-    "@sentre/senhub": "^3.2.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.2.1",
