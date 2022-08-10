@@ -27,7 +27,7 @@ export const utilsBN = {
    * @param decimals
    * @returns
    */
-  undecimalize: (numBN: BN, decimals: number): string => {
+  undecimalize: (numBN: BN | bigint, decimals: number): string => {
     if (decimals < 0 || decimals % 1 !== 0)
       throw new Error('decimals must be an integer greater than zero')
     if (!numBN) return '0'
