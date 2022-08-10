@@ -1,6 +1,6 @@
 {
   "name": "@sen-use/components",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "author": "Michael",
   "repository": "git+https://github.com/dmcong/sen-use.git",
   "license": "MIT",
@@ -45,14 +45,14 @@
     "react-use": "^17.4.0"
   },
   "devDependencies": {
-    "@sen-use/web3": "^2.0.9",
-    "@sentre/senhub": "^3.2.3",
     "@craco/craco": "^7.0.0-alpha.5",
     "@project-serum/anchor": "^0.24.2",
     "@reduxjs/toolkit": "^1.8.0",
+    "@sen-use/web3": "^2.0.10",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/craco-plugins": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
+    "@sentre/senhub": "^3.2.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.2.1",
