@@ -56,7 +56,11 @@ export const useAccountBalance = (accountAddress: string) => {
   if (accountAddress === walletAddress)
     return buildResult(DEFAULT_EMPTY_ADDRESS, new BN(lamports.toString()), 9)
 
-  return buildResult(mintAddress, new BN(amount.toString()), decimals)
+  return buildResult(
+    mintAddress,
+    amount ? new BN(amount.toString()) : new BN(0),
+    decimals,
+  )
 }
 
 /**
