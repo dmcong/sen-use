@@ -43,6 +43,10 @@ const MintTag = ({
           e.stopPropagation()
           onRemove(mintAddress)
         }}
+        style={{
+          background: util.randomColor(mintAddress),
+          border: `1px solid ${util.randomColor(mintAddress, 0.2)}`,
+        }}
       />
       <Space size={8} style={{ width: '100%', justifyContent: 'center' }}>
         <MintAvatar mintAddress={mintAddress} />

@@ -99,7 +99,7 @@ const SearchMints = memo(
             ))}
           </Row>
         </Col>
-        <Col span={24}>
+        <Col span={24} className="scrollbar">
           <Spin
             spinning={loading}
             tip={!searching ? 'Loading...' : 'Searching...'}
@@ -107,7 +107,6 @@ const SearchMints = memo(
             <Row
               gutter={[8, 8]}
               style={{ maxHeight: 360, paddingRight: 4, minHeight: 50 }}
-              className="scrollbar"
               id="sentre-token-selection-list"
               justify="center"
             >
