@@ -1,6 +1,6 @@
 {
   "name": "@sen-use/components",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "author": "Michael",
   "repository": "git+https://github.com/dmcong/sen-use.git",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "@craco/craco": "^7.0.0-alpha.5",
     "@project-serum/anchor": "^0.24.2",
     "@reduxjs/toolkit": "^1.8.0",
-    "@sen-use/web3": "^2.0.13",
+    "@sen-use/web3": "^2.0.14",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/craco-plugins": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
