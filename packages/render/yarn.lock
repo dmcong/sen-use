@@ -1924,10 +1924,10 @@
   dependencies:
     react-helmet "^6.1.0"
 
-"@sentre/connector@^0.0.55":
-  version "0.0.55"
-  resolved "https://registry.yarnpkg.com/@sentre/connector/-/connector-0.0.55.tgz#85985c42b077774f358fed0c65d1e0691d015ed6"
-  integrity sha512-Zs50Gl2IdT9fhzCrQZPrCdfh6JYgxUb5XCOkYM5++MXG99HZW6LJ3MU/21opA7WzdOdKiDNygp+yEmSUiK7aOA==
+"@sentre/connector@^0.0.57":
+  version "0.0.57"
+  resolved "https://registry.yarnpkg.com/@sentre/connector/-/connector-0.0.57.tgz#bab8c17db3553af9537ae4b2ce6628b1a50892f4"
+  integrity sha512-E2R3WVM6LJwt1QFmxT9DYl7jMUbiDhooWEuSqD0wd4h6MrPivfL2cmxLWfRsWO0wO4P6yoVP1p4W4K+r8nT/jw==
   dependencies:
     "@solana/wallet-adapter-base" "^0.9.7"
     "@solana/web3.js" "^1.44.3"
@@ -1935,10 +1935,10 @@
     tweetnacl "^1.0.3"
     uuid "^8.3.2"
 
-"@sentre/craco-plugins@^1.0.35":
-  version "1.0.35"
-  resolved "https://registry.yarnpkg.com/@sentre/craco-plugins/-/craco-plugins-1.0.35.tgz#9816fa7adf0f28d38970ea9a85db29036484e09f"
-  integrity sha512-uer73ov7XfyuZ6CODxwC/052q0utqK9uuLYo2C4H+59nrzvjoh22zyYaOaCxM3J+lQR/3fzGcCw/gZWMD4UUSw==
+"@sentre/craco-plugins@^1.0.37":
+  version "1.0.37"
+  resolved "https://registry.yarnpkg.com/@sentre/craco-plugins/-/craco-plugins-1.0.37.tgz#59c31c5b8376c3f5ff81a90abd15d9270c448ed2"
+  integrity sha512-HF+vqFwkLlVvve1x7f7Y+qJ2NACU+vxoEjgNDqwwXt9OQjsY6hB/xN6wRMCqixhTpwgWS+xIziHSLw5hDk86XQ==
   dependencies:
     "@babel/cli" "^7.17.10"
     "@babel/core" "^7.18.2"
@@ -1981,10 +1981,10 @@
   resolved "https://registry.yarnpkg.com/@sentre/react-lazyload/-/react-lazyload-3.2.2.tgz#f3d921327a2b14b9b3a9e906d01034f11387097a"
   integrity sha512-NKJhz9G8pModoZJaLMziRJtd582pFHbIydNXwRI72ECkjqbc7XIgBX+8kssrUtRxK2rW9VVQnGKDpmyZ8iSIyw==
 
-"@sentre/senhub@^3.2.2":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@sentre/senhub/-/senhub-3.2.2.tgz#8de2688dceaa4705ff48e807eec101dfaa363b75"
-  integrity sha512-wBJwAOTRAP4Ep0dSFYtrTC7pyTiUbcGMX/L9z8BDGyyLLfvaPSyZSwZqk8YcJbBiIxKWCzh+cTrEQgZJLeLozw==
+"@sentre/senhub@^3.2.3":
+  version "3.2.9"
+  resolved "https://registry.yarnpkg.com/@sentre/senhub/-/senhub-3.2.9.tgz#16397b091c638408c28e3389df1a9d60e1913629"
+  integrity sha512-AG5N3qtuXSF2Z6Kg3CIyQq5XHmrCG0wgOReaSeCLxt2mMWD6Oyyxeh/T4PDFPbV4FmAa/KrGAsb6ECqO8999cw==
   dependencies:
     "@dnd-kit/core" "^4.0.1"
     "@dnd-kit/sortable" "^5.0.0"
@@ -1993,11 +1993,12 @@
     "@reduxjs/toolkit" "^1.8.0"
     "@senswap/sen-js" "^1.4.0"
     "@sentre/antd-ionicon" "^1.0.37"
-    "@sentre/connector" "^0.0.55"
+    "@sentre/connector" "^0.0.57"
     "@sentre/react-dynamic-remote-component" "^0.0.6"
     "@sentre/react-lazyload" "^3.2.2"
     "@solana/spl-token-registry" "^0.2.3771"
     antd "^4.21.1"
+    axios "^0.27.2"
     bn.js "^5.2.0"
     bs58 "^4.0.1"
     copy-to-clipboard "^3.3.1"
@@ -3588,6 +3589,14 @@ axios@^0.21.1:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
+
+axios@^0.27.2:
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
+  integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
+  dependencies:
+    follow-redirects "^1.14.9"
+    form-data "^4.0.0"
 
 axobject-query@^2.2.0:
   version "2.2.0"
@@ -6273,7 +6282,7 @@ fnv1a@^1.0.1:
   resolved "https://registry.yarnpkg.com/fnv1a/-/fnv1a-1.1.1.tgz#4e01d51bae60735d00e54ffde02581fe2e74f465"
   integrity sha512-S2HviLR9UyNbt8R+vU6YeQtL8RliPwez9DQEVba5MAvN3Od+RSgKUSL2+qveOMt3owIeBukKoRu2enoOck5uag==
 
-follow-redirects@^1.0.0, follow-redirects@^1.14.0:
+follow-redirects@^1.0.0, follow-redirects@^1.14.0, follow-redirects@^1.14.9:
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
   integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
@@ -6313,6 +6322,15 @@ form-data@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.1.tgz#ebd53791b78356a99af9a300d4282c4d5eb9755f"
   integrity sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
+    mime-types "^2.1.12"
+
+form-data@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+  integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
