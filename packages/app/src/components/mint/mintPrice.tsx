@@ -11,7 +11,7 @@ const MintPrice = ({
   mintAddress: Address
   format?: string
 }) => {
-  const [price, setPrice] = useState('--')
+  const [price, setPrice] = useState('$0')
   const getMintPrice = useGetMintPrice()
 
   const updateMintPrice = useCallback(async () => {
