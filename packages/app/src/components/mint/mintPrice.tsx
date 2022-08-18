@@ -11,7 +11,7 @@ const MintPrice = ({
   mintAddress: Address
   format?: string
 }) => {
-  const [price, setPrice] = useState('$0')
+  const [price, setPrice] = useState('--')
   const getMintPrice = useGetMintPrice()
 
   const updateMintPrice = useCallback(async () => {
@@ -22,7 +22,7 @@ const MintPrice = ({
     updateMintPrice()
   }, [updateMintPrice])
 
-  return <span>{util.numeric(price).format(format)}</span>
+  return <span>{price}</span>
 }
 
 export default memo(MintPrice)
