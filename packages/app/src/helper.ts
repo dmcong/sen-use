@@ -1,4 +1,4 @@
-import { util } from '@sentre/senhub'
+import { MetaplexProvider, util } from '@sentre/senhub'
 
 export const notifySuccess = (content: string, txId: string) => {
   return window.notify({
@@ -14,3 +14,5 @@ export const notifyError = (er: any) => {
     description: er.message,
   })
 }
+
+export const metaplexProvider = new MetaplexProvider()
