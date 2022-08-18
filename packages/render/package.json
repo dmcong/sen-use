@@ -34,15 +34,11 @@
     "web-vitals": "^2.1.1"
   },
   "scripts": {
-    "start": "REACT_APP_HMR=$PWD/src/bootstrap.app.tsx craco start",
-    "build": "yarn build:production",
-    "build:production": "craco build",
-    "build:staging": "env-cmd -f .env.staging craco build",
+    "start": "craco start",
+    "build": "craco build",
     "test": "craco test",
-    "predeploy": "yarn build:production",
-    "deploy": "gh-pages -d build",
-    "preserve": "yarn build:staging",
-    "serve": "serve -s build -l 3000"
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -64,8 +60,8 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0-alpha.5",
-    "@sentre/craco-plugins": "^1.0.37",
-    "@sentre/senhub": "^3.2.3",
+    "@sentre/craco-plugins": "^1.0.38",
+    "@sentre/senhub": "^3.2.13",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.2.1",

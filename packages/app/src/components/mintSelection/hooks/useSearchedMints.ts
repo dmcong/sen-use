@@ -1,5 +1,6 @@
+import { metaplexProvider } from 'helper'
 import { useCallback, useEffect, useState } from 'react'
-import { tokenProvider } from '@sentre/senhub'
+import { tokenProvider, util } from '@sentre/senhub'
 
 import { useMyMints } from './useMyMints'
 import { useSortMints } from './useSortMints'
@@ -36,6 +37,10 @@ export const useSearchedMints = (keyword: string = '') => {
           return setSearchedMints(defaultMints)
         }
         const tokens = await tokenProvider.find(keyword, 0)
+        if (!tokens.length && util.isAddress(keyword)) {
+          const token = await metaplexProvider.findByAddress(keyword)
+          if (token) tokens.push(token)
+        }
         const verifiedTokens: string[] = []
         const unverifiedTokens: string[] = []
         for (const mint of tokens) {

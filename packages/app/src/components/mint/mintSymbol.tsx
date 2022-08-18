@@ -37,10 +37,11 @@ const MintSymbol = memo(
     const deriveSymbols = useCallback(async () => {
       if (!util.isAddress(mintAddress.toString()))
         return setSymbol(DEFAULT_SYMBOL)
-
       // Find atomic tokens
-      let tokens = await tokenProvider.findAtomicTokens(mintAddress)
-      if (!tokens) {
+      const token = await tokenProvider.findByAddress(mintAddress)
+      if (token) {
+        var tokens = await tokenProvider.findAtomicTokens(mintAddress)
+      } else {
         tokens = [
           await DataLoader.load(
             'metaplexProvider.findByAddress' + mintAddress.toString(),

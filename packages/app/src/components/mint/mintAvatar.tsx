@@ -37,8 +37,10 @@ const MintAvatar = ({
   const deriveAvatars = useCallback(async () => {
     if (!util.isAddress(mintAddress.toString()))
       return setAvatars(DEFAULT_AVATARS)
-    let tokens = await tokenProvider.findAtomicTokens(mintAddress)
-    if (!tokens) {
+    const token = await tokenProvider.findByAddress(mintAddress)
+    if (token) {
+      var tokens = await tokenProvider.findAtomicTokens(mintAddress)
+    } else {
       tokens = [
         await DataLoader.load(
           'metaplexProvider.findAtomicTokens' + mintAddress.toString(),
