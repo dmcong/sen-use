@@ -2,8 +2,7 @@ import { util } from '@sentre/senhub'
 
 import { Button, Card, Space, Typography } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
-import { MintAvatar } from '../index'
-import MintSymbol from '../mintSymbol'
+import { MintAvatar, MintSymbol } from 'components'
 
 import './index.less'
 

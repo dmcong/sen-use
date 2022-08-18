@@ -4,7 +4,7 @@ import CopyToClipboard from 'react-copy-to-clipboard'
 
 import IonIcon from '@sentre/antd-ionicon'
 import { Button, Card, Col, Row, Space, Tooltip, Typography } from 'antd'
-import { MintAvatar, MintName, MintSymbol } from '../index'
+import { MintAvatar, MintName, MintSymbol } from 'components'
 
 import { useJupiterTokens } from './hooks/useJupiterTokens'
 

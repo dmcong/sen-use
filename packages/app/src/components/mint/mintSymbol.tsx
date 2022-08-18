@@ -41,10 +41,12 @@ const MintSymbol = memo(
       // Find atomic tokens
       let tokens = await tokenProvider.findAtomicTokens(mintAddress)
       if (!tokens) {
-        tokens = await DataLoader.load(
-          'metaplexProvider.findAtomicTokens' + mintAddress.toString(),
-          () => metaplexProvider.findAtomicTokens(mintAddress),
-        )
+        tokens = [
+          await DataLoader.load(
+            'metaplexProvider.findByAddress' + mintAddress.toString(),
+            () => metaplexProvider.findByAddress(mintAddress),
+          ),
+        ]
       }
       const symbols = tokens.map((token) => {
         if (!token?.symbol) return mintAddress.toString().substring(0, 4)

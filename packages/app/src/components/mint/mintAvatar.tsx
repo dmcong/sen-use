@@ -2,7 +2,7 @@ import { memo, ReactNode, useCallback, useEffect, useState } from 'react'
 import { Address } from '@project-serum/anchor'
 import { tokenProvider, util } from '@sentre/senhub'
 
-import { Avatar } from 'antd'
+import { Avatar, Spin } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
 
 import { DataLoader } from '@sen-use/web3'
@@ -32,17 +32,19 @@ const MintAvatar = ({
   reversed = false,
   ...props
 }: MintAvatarProps) => {
-  const [avatars, setAvatars] = useState(DEFAULT_AVATARS)
+  const [avatars, setAvatars] = useState<(string | undefined)[]>()
 
   const deriveAvatars = useCallback(async () => {
     if (!util.isAddress(mintAddress.toString()))
       return setAvatars(DEFAULT_AVATARS)
     let tokens = await tokenProvider.findAtomicTokens(mintAddress)
     if (!tokens) {
-      tokens = await DataLoader.load(
-        'metaplexProvider.findAtomicTokens' + mintAddress.toString(),
-        () => metaplexProvider.findAtomicTokens(mintAddress),
-      )
+      tokens = [
+        await DataLoader.load(
+          'metaplexProvider.findAtomicTokens' + mintAddress.toString(),
+          () => metaplexProvider.findByAddress(mintAddress),
+        ),
+      ]
     }
     return setAvatars(tokens.map((token) => token?.logoURI))
   }, [mintAddress])
@@ -50,17 +52,20 @@ const MintAvatar = ({
     deriveAvatars()
   }, [deriveAvatars])
 
-  if (avatars.length === 1)
+  if (!avatars || avatars.length > 1)
     return (
       <Avatar
-        src={avatars[0]}
+        src={avatars?.[0]}
         size={size}
         style={{ backgroundColor: '#2D3355', border: 'none' }}
         {...props}
       >
-        {icon}
+        <Spin size="small" spinning>
+          {icon}
+        </Spin>
       </Avatar>
     )
+
   return (
     <Avatar.Group
       maxCount={2}

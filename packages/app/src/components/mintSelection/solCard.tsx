@@ -2,7 +2,7 @@ import { util, useWalletBalance } from '@sentre/senhub'
 import { utilsBN } from '@sen-use/web3'
 
 import { Card, Col, Row, Space, Typography } from 'antd'
-import { MintAvatar, MintName, MintSymbol } from '../index'
+import { MintAvatar, MintName, MintSymbol } from 'components'
 import { MintCardActions, Verification } from './mintCard'
 
 import { useJupiterTokens } from './hooks/useJupiterTokens'

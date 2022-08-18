@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createPDB, useWalletAddress } from '@sentre/senhub'
-import { MintSelection, NFTSelection, searchNFTType } from '@sen-use/components'
+import { NFTSelection, searchNFTType } from '@sen-use/components'
+import { MintSelection } from '@sen-use/app'
 
 import { Row, Col, Typography, Button, Space } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'

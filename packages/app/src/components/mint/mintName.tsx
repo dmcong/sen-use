@@ -38,10 +38,12 @@ const MintName = memo(
       // Find atomic tokens
       let tokens = await tokenProvider.findAtomicTokens(mintAddress)
       if (!tokens) {
-        tokens = await DataLoader.load(
-          'metaplexProvider.findAtomicTokens' + mintAddress.toString(),
-          () => metaplexProvider.findAtomicTokens(mintAddress),
-        )
+        tokens = [
+          await DataLoader.load(
+            'metaplexProvider.findByAddress' + mintAddress.toString(),
+            () => metaplexProvider.findByAddress(mintAddress),
+          ),
+        ]
       }
       // Get name in token info
       const names = tokens.map((token) => token?.name || DEFAULT_NAME)

@@ -2,8 +2,9 @@ import { CSSProperties, Fragment, useState } from 'react'
 
 import { Button, Modal, Space } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
-import { MintAvatar, MintSymbol } from '../index'
+
 import SearchMints from './searchMints'
+import { MintAvatar, MintSymbol } from 'components'
 
 export type MintSelectionProps = {
   value?: string
