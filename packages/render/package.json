@@ -1,6 +1,6 @@
 {
   "name": "render",
-  "version": "3.0.9",
+  "version": "3.1.1",
   "private": true,
   "peerDependencies": {
     "antd": "^4.21.1",
@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
-    "@sen-use/app": "^3.0.9",
-    "@sen-use/components": "^3.0.9",
-    "@sen-use/web3": "^3.0.9",
+    "@sen-use/app": "^3.1.1",
+    "@sen-use/components": "^3.1.1",
+    "@sen-use/web3": "^3.1.1",
     "@senswap/sen-js": "^1.4.0",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
