@@ -62,7 +62,10 @@ const MintAvatar = ({
         style={{ backgroundColor: '#2D3355', border: 'none' }}
         {...props}
       >
-        <Spin size="small" spinning={util.isAddress(mintAddress.toString())}>
+        <Spin
+          size="small"
+          spinning={util.isAddress(mintAddress.toString()) || !avatars}
+        >
           {icon}
         </Spin>
       </Avatar>
