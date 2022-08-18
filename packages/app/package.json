@@ -1,6 +1,6 @@
 {
   "name": "@sen-use/app",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "Michael",
   "repository": "git+https://github.com/dmcong/sen-use.git",
   "license": "MIT",
@@ -41,14 +41,14 @@
   },
   "dependencies": {
     "localforage": "^1.10.0",
-    "web3.storage": "^4.2.0",
-    "react-use": "^17.4.0"
+    "react-use": "^17.4.0",
+    "web3.storage": "^4.2.0"
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0-alpha.5",
     "@reduxjs/toolkit": "^1.8.0",
-    "@sen-use/components": "^3.0.1",
-    "@sen-use/web3": "^3.0.1",
+    "@sen-use/components": "^3.0.2",
+    "@sen-use/web3": "^3.0.2",
     "@sentre/antd-ionicon": "^1.0.35",
     "@sentre/craco-plugins": "^1.0.35",
     "@sentre/react-lazyload": "^3.2.2",
