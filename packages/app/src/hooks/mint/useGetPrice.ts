@@ -45,7 +45,7 @@ export const useGetMintPrice = () => {
   const getPrice = useCallback(
     async (mintAddress: Address) => {
       const cgkPrice = await getCgkPrice(mintAddress.toString())
-      if (!!cgkPrice) return cgkPrice
+      if (!!Number(cgkPrice)) return cgkPrice
 
       const decimals = await getMintDecimals({ mintAddress })
       return getJupiterPrice(mintAddress.toString(), decimals)
@@ -65,14 +65,12 @@ export const useGetTotalValue = () => {
       try {
         if (!amountBN.gt(new BN(0))) return 0
         const price = await getPrice(mintAddress)
-        if (!price) {
-          const decimals = await getMintDecimals({
-            mintAddress: mintAddress.toString(),
-          })
-          const amount = utilsBN.undecimalize(amountBN, decimals || 0)
-          return Number(amount) * price
-        }
-        return price
+        if (!price) return 0
+        const decimals = await getMintDecimals({
+          mintAddress: mintAddress.toString(),
+        })
+        const amount = utilsBN.undecimalize(amountBN, decimals || 0)
+        return Number(amount) * price
       } catch (error) {
         return 0
       }
