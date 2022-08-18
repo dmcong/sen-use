@@ -66,7 +66,7 @@ const MintSymbol = memo(
     return (
       <Tooltip
         title={symbol}
-        visible={symbol.endsWith(ENDED_SORT) || isMobile ? false : undefined}
+        visible={!symbol.endsWith(ENDED_SORT) || isMobile ? false : undefined}
       >
         <span>{symbol}</span>
       </Tooltip>

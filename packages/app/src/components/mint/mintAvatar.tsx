@@ -64,7 +64,7 @@ const MintAvatar = ({
       >
         <Spin
           size="small"
-          spinning={util.isAddress(mintAddress.toString()) || !avatars}
+          spinning={util.isAddress(mintAddress.toString()) && !avatars}
         >
           {icon}
         </Spin>

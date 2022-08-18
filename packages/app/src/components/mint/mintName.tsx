@@ -62,7 +62,7 @@ const MintName = memo(
     return (
       <Tooltip
         title={name}
-        visible={name.endsWith(ENDED_SORT) || isMobile ? false : undefined}
+        visible={!name.endsWith(ENDED_SORT) || isMobile ? false : undefined}
       >
         <span>{name}</span>
       </Tooltip>
