@@ -65,12 +65,14 @@ export const useGetTotalValue = () => {
       try {
         if (!amountBN.gt(new BN(0))) return 0
         const price = await getPrice(mintAddress)
-        if (!price) return 0
-        const decimals = await getMintDecimals({
-          mintAddress: mintAddress.toString(),
-        })
-        const amount = utilsBN.undecimalize(amountBN, decimals || 0)
-        return Number(amount) * price
+        if (!price) {
+          const decimals = await getMintDecimals({
+            mintAddress: mintAddress.toString(),
+          })
+          const amount = utilsBN.undecimalize(amountBN, decimals || 0)
+          return Number(amount) * price
+        }
+        return price
       } catch (error) {
         return 0
       }
