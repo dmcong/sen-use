@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useUI } from '@sentre/senhub'
+import { Infix, useInfix } from '@sentre/senhub'
 
 import { Row, Col, Input, Button } from 'antd'
 import IonIcon from '@sentre/antd-ionicon'
@@ -15,12 +15,10 @@ const Search = ({
   collectionAddress = [],
   selectedNFTs = [],
 }: NFTSelectionProps) => {
-  const {
-    ui: { width },
-  } = useUI()
-  const isMobile = width < 992
   const [keyword, setKeyword] = useState('')
   const [hiddenUnknownNFTs, setHiddenUnknownNFTs] = useState(true)
+  const infix = useInfix()
+  const isMobile = infix < Infix.lg
 
   return (
     <Row gutter={[16, 16]}>

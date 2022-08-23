@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Address } from '@project-serum/anchor'
-import { tokenProvider, useUI, util } from '@sentre/senhub'
+import { Infix, tokenProvider, useInfix, util } from '@sentre/senhub'
 import { DataLoader } from '@sen-use/web3'
 
 import { Tooltip } from 'antd'
@@ -27,11 +27,9 @@ const MintName = memo(
     reversed?: boolean
   }) => {
     const [name, setName] = useState(DEFAULT_NAME)
-    const {
-      ui: { width },
-    } = useUI()
+    const infix = useInfix()
 
-    const isMobile = width < 575
+    const isMobile = infix < Infix.sm
 
     const deriveNames = useCallback(async () => {
       if (!util.isAddress(mintAddress.toString())) return setName(DEFAULT_NAME)

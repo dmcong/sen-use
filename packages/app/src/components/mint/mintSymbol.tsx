@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Address } from '@project-serum/anchor'
-import { tokenProvider, useUI, util } from '@sentre/senhub'
+import { tokenProvider, util, useInfix, Infix } from '@sentre/senhub'
 import { DataLoader } from '@sen-use/web3'
 
 import { Tooltip } from 'antd'
@@ -28,11 +28,9 @@ const MintSymbol = memo(
     reversed?: boolean
   }) => {
     const [symbol, setSymbol] = useState(DEFAULT_SYMBOL)
-    const {
-      ui: { width },
-    } = useUI()
+    const infix = useInfix()
 
-    const isMobile = width < 575
+    const isMobile = infix < Infix.sm
 
     const deriveSymbols = useCallback(async () => {
       if (!util.isAddress(mintAddress.toString()))
