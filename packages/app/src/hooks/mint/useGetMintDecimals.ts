@@ -17,7 +17,7 @@ export const useGetMintDecimals = () => {
         mintAddress: mintAddress.toString(),
         force,
       })
-      if (!decimals) {
+      if (decimals === undefined) {
         console.error('getMintDecimals: ', mintAddress)
         throw new Error("Can't get mint decimals")
       }
