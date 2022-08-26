@@ -1,16 +1,16 @@
-import {
-  BorshInstructionCoder,
-  Idl,
-  IdlAccounts,
-  Program,
-} from '@project-serum/anchor'
+// import {
+//   BorshInstructionCoder,
+//   Idl,
+//   IdlAccounts,
+//   Program,
+// } from '@project-serum/anchor'
 import { sha256 } from 'js-sha256'
 import camelcase from 'camelcase'
 import { snakeCase } from 'snake-case'
 import bs58 from 'bs58'
 
-import { getRawProgram } from '../utils'
-import { AllAccounts, AllInstructions, IxAgrsData } from './types'
+// import { getRawProgram } from '../utils'
+// import { AllAccounts, AllInstructions, IxAgrsData } from './types'
 
 /**
  * Number of bytes of the account discriminator.
@@ -40,52 +40,52 @@ export const ixDiscriminator = (ixName: string): Buffer => {
 export const encodeIxData = bs58.encode
 export const decodeIxData = bs58.decode
 
-export class IdlParser<T extends Idl> {
-  program: Program<T>
-  idl: Idl
-  constructor(idl: T) {
-    this.program = getRawProgram<T>(idl)
-    this.idl = idl
-  }
+// export class IdlParser<T extends Idl> {
+//   program: Program<T>
+//   idl: Idl
+//   constructor(idl: T) {
+//     this.program = getRawProgram<T>(idl)
+//     this.idl = idl
+//   }
 
-  parserAccountData = (
-    accountName: AllAccounts<T>['name'],
-    bufData: Buffer,
-    discriminator: boolean = true,
-  ) => {
-    if (!discriminator) {
-      const discriminatorBuf: Buffer = accountDiscriminator(accountName)
-      bufData = Buffer.concat([discriminatorBuf, bufData])
-    }
+//   parserAccountData = (
+//     accountName: AllAccounts<T>['name'],
+//     bufData: Buffer,
+//     discriminator: boolean = true,
+//   ) => {
+//     if (!discriminator) {
+//       const discriminatorBuf: Buffer = accountDiscriminator(accountName)
+//       bufData = Buffer.concat([discriminatorBuf, bufData])
+//     }
 
-    return this.program.coder.accounts.decode<
-      IdlAccounts<T>[typeof accountName]
-    >(accountName, bufData)
-  }
+//     return this.program.coder.accounts.decode<
+//       IdlAccounts<T>[typeof accountName]
+//     >(accountName, bufData)
+//   }
 
-  parserIxData = (
-    ixName: AllInstructions<T>['name'],
-    bufData: Buffer,
-    discriminator: boolean = true,
-  ) => {
-    try {
-      const ix = this.idl.instructions.find((e) => e.name === ixName)
-      if (!ix) return null
+//   parserIxData = (
+//     ixName: AllInstructions<T>['name'],
+//     bufData: Buffer,
+//     discriminator: boolean = true,
+//   ) => {
+//     try {
+//       const ix = this.idl.instructions.find((e) => e.name === ixName)
+//       if (!ix) return null
 
-      if (!discriminator) {
-        const discriminatorBuf: Buffer = ixDiscriminator(ixName)
-        bufData = Buffer.concat([discriminatorBuf, bufData])
-      }
-      const borshInstructionCoder = new BorshInstructionCoder(this.idl)
-      const decodeData = borshInstructionCoder.decode(bufData)
+//       if (!discriminator) {
+//         const discriminatorBuf: Buffer = ixDiscriminator(ixName)
+//         bufData = Buffer.concat([discriminatorBuf, bufData])
+//       }
+//       const borshInstructionCoder = new BorshInstructionCoder(this.idl)
+//       const decodeData = borshInstructionCoder.decode(bufData)
 
-      if (!decodeData) return null
-      return {
-        name: decodeData.name,
-        data: decodeData.data as IxAgrsData<T, typeof ixName>,
-      }
-    } catch (error) {
-      return null
-    }
-  }
-}
+//       if (!decodeData) return null
+//       return {
+//         name: decodeData.name,
+//         data: decodeData.data as IxAgrsData<T, typeof ixName>,
+//       }
+//     } catch (error) {
+//       return null
+//     }
+//   }
+// }
